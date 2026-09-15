@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16324f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Chapitre 1 — Parcours · Les Serres du Thérain</title>
+<style>
+:root{--nav:#16324f;--nav2:#1f4468;--navdark:#0e2338;--navlite:#bcd0e2;--line:#c8d2dc;--bg:#f4f7fa;
+--card:#fff;--accbg:#eef3f7;--zebra:#f7fafc;--txt:#1a1a1a;--muted:#5a6672}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+ background:var(--bg);color:var(--txt);font-size:16px;line-height:1.5;display:flex;flex-direction:column;overflow:hidden}
+header{flex:0 0 auto;background:var(--nav);color:#fff;padding:8px 14px;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:20}
+.htop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:.97rem;margin:0;font-weight:700}
+.hsub{font-size:.73rem;color:var(--navlite);margin-top:1px}
+#clock{font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.14);
+ padding:4px 10px;border-radius:9px;cursor:pointer;white-space:nowrap;color:#fff}
+#clock.hot{background:#8a2f2f}
+.bar{height:5px;background:var(--navdark);border-radius:99px;margin-top:7px;overflow:hidden}
+.bar i{display:block;height:100%;background:#7ed0ae;width:0;transition:width .3s}
+nav{flex:0 0 auto;display:flex;gap:5px;overflow-x:auto;padding:7px 10px;background:var(--nav2);scrollbar-width:none;z-index:19}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;min-height:38px;padding:7px 12px;border:0;border-radius:20px;
+ background:rgba(255,255,255,.14);color:#eaf5f0;font-size:.8rem;font-weight:600;cursor:pointer}
+nav button.on{background:#fff;color:var(--nav)}
+nav button.fait{background:#7ed0ae;color:var(--navdark)}
+.app{flex:1 1 auto;display:grid;grid-template-columns:minmax(300px,40%) 1fr;min-height:0}
+#annexes{overflow-y:auto;background:#fff;border-right:1px solid var(--line);padding:12px 13px 40px;-webkit-overflow-scrolling:touch}
+#work{overflow-y:auto;padding:16px 16px 40px;-webkit-overflow-scrolling:touch}
+#annexes h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:0 0 10px}
+.acc{border:1px solid var(--line);border-radius:9px;margin-bottom:8px;overflow:hidden}
+.acc>button{width:100%;text-align:left;background:var(--accbg);border:0;padding:10px 12px;font:inherit;
+ font-size:.85rem;font-weight:700;color:var(--nav);cursor:pointer;display:flex;justify-content:space-between;gap:8px;min-height:42px;align-items:center}
+.acc>div{display:none;padding:10px 12px;border-top:1px solid var(--line)}
+.acc.open>div{display:block}
+.acc>button i{font-style:normal;color:var(--muted);font-weight:400}
+section{display:none}section.on{display:block}
+h2{font-size:1.1rem;color:var(--nav);margin:2px 0 4px}
+h3{font-size:.95rem;color:var(--nav);margin:18px 0 6px}
+p{margin:0 0 9px}
+.lede{color:var(--muted);font-size:.87rem}
+.budget{display:inline-block;background:var(--accbg);border:1px solid var(--line);color:var(--nav);
+ border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:700;margin-bottom:11px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;margin:0 0 13px}
+table{border-collapse:collapse;width:100%;font-size:.8rem;margin:7px 0}
+th{background:var(--nav);color:#fff;text-align:left;padding:6px 7px;font-weight:600}
+td{border:1px solid var(--line);padding:5px 7px;vertical-align:middle}
+tr:nth-child(even) td{background:var(--zebra)}
+td.n{text-align:right;white-space:nowrap}
+.wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+blockquote{margin:0 0 7px;padding:5px 0 5px 11px;border-left:3px solid var(--line);font-style:italic;color:#333;font-size:.86rem}
+.q{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);
+ border-radius:10px;padding:12px 13px;margin:0 0 11px}
+.q.rep{border-left-color:var(--nav)}
+.q.good{border-left-color:#5fb894}
+.q.bad{border-left-color:#c98a8a}
+.qh{display:flex;gap:8px;align-items:baseline;margin-bottom:8px}
+.qn{font-weight:800;color:var(--nav);font-size:.84rem;flex:0 0 auto}
+.qt{font-size:.91rem}
+.numrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input[type=text],textarea{font:inherit;font-size:.97rem;padding:10px 11px;border:1.5px solid var(--line);
+ border-radius:9px;background:#fff;width:100%;max-width:220px}
+textarea{max-width:100%;min-height:92px;line-height:1.45;resize:vertical}
+input.cell{max-width:125px;padding:7px 8px;font-size:.87rem}
+input:focus,textarea:focus{outline:none;border-color:var(--nav)}
+input:disabled,textarea:disabled{background:#f4f6f8;color:#333}
+select{font:inherit;font-size:.9rem;padding:9px;border:1.5px solid var(--line);border-radius:9px;background:#fff;width:100%}
+.unit{color:var(--muted);font-size:.85rem}
+.saved{font-size:.76rem;color:var(--nav);font-weight:700;margin-top:7px;display:none}
+.saved.on{display:block}
+.btn{min-height:42px;padding:9px 16px;border:0;border-radius:9px;background:var(--nav);color:#fff;font-size:.87rem;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c5cd;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--nav);border:1.5px solid var(--nav)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:.79rem}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.opts{display:flex;flex-direction:column;gap:7px;margin-top:3px}
+.opt{display:flex;gap:9px;align-items:flex-start;min-height:42px;padding:9px 10px;border:1.5px solid var(--line);
+ border-radius:9px;background:#fff;cursor:pointer;font-size:.88rem}
+.opt.sel{border-color:var(--nav);background:var(--accbg)}
+.opt.good{border-color:#a9d5c6;background:#e7f4ef}
+.opt.bad{border-color:#e2b3b3;background:#fbeeee}
+.opt span.mk{flex:0 0 auto;font-weight:800;color:var(--nav)}
+.fb{margin-top:9px;padding:9px 11px;border-radius:9px;font-size:.85rem}
+.fb.ok{background:#e7f4ef;border:1px solid #a9d5c6;color:#14503f}
+.fb.ko{background:#fbeeee;border:1px solid #e2b3b3;color:#8a2f2f}
+.fb.info{background:#fdf7ec;border:1px solid #e0c08a;color:#5c3f0c}
+.note{background:var(--accbg);border-left:4px solid var(--nav);border-radius:0 8px 8px 0;padding:9px 12px;margin:11px 0;font-size:.85rem}
+.warn{background:#fdf7ec;border:1px solid #e0c08a;border-radius:9px;padding:9px 12px;margin:11px 0;font-size:.85rem;color:#5c3f0c}
+.score{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.sc{flex:1 1 100px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.sc b{display:block;font-size:1.3rem;color:var(--nav);line-height:1.2}
+.sc small{color:var(--muted);font-size:.71rem}
+.kwbar{height:5px;background:#e4ecf2;border-radius:99px;margin-top:7px;overflow:hidden}
+.kwbar i{display:block;height:100%;width:0}
+.selfrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+footer{flex:0 0 auto;background:#fff;border-top:1px solid var(--line);
+ padding:8px 13px calc(8px + env(safe-area-inset-bottom,0px));display:flex;gap:9px;
+ justify-content:space-between;align-items:center;z-index:21;flex-wrap:wrap}
+footer .l{font-size:.79rem;color:var(--muted)}
+footer .l b{color:var(--nav)}
+#annexbtn{display:none}
+@media(max-width:1000px){
+ .app{grid-template-columns:1fr}
+ #annexes{position:fixed;inset:0;z-index:70;display:none;padding-top:14px;border:0}
+ #annexes.show{display:block}
+ #annexbtn{display:inline-block}
+ #annexclose{display:block}
+}
+@media(min-width:1001px){#annexclose{display:none}}
+@media print{nav,footer,#clock,.acts{display:none}body{overflow:visible;height:auto}
+ .app{display:block}section{display:block!important}#annexes{display:block;border:0}}
+
+@media(max-width:600px){
+ h1{font-size:.86rem}
+ .hsub{font-size:.68rem}
+ #clock{font-size:.98rem;padding:3px 8px}
+ nav button{padding:6px 10px;font-size:.76rem;min-height:36px}
+ #work{padding:12px 11px 30px}
+ #annexes{padding:12px 11px 30px}
+ .q{padding:11px 11px}
+ .qt{font-size:.89rem}
+ table{font-size:.76rem}
+ th,td{padding:5px 6px}
+ input[type=text],textarea,select{font-size:16px;max-width:100%}
+ input.cell{max-width:100%}
+ .opt{font-size:.86rem;padding:10px 9px}
+ footer{flex-direction:column;align-items:stretch;gap:7px}
+ footer .l{text-align:center}
+ footer>span:last-child{display:flex;gap:7px}
+ footer>span:last-child .btn{flex:1 1 auto}
+ .sc{flex:1 1 44%}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htop">
+    <div><h1>Chapitre 1 — Quels produits ou quels services pour quels besoins&nbsp;?</h1>
+      <div class="hsub">Terminale STMG · MSGN enseignement commun · Les Serres du Thérain · 2 heures</div></div>
+    <div id="clock" onclick="clockToggle()">2:00:00</div>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+</header>
+
+<nav id="nav"></nav>
+
+<div class="app">
+  <aside id="annexes">
+    <button class="btn sm ghost" id="annexclose" style="float:right" onclick="toggleAnnexes()">Fermer</button>
+    <h2>Annexes — dossier documentaire</h2>
+    <div id="annexlist"></div>
+  </aside>
+  <div id="work"></div>
+</div>
+
+<footer>
+  <span class="l" id="foot">—</span>
+  <span style="display:flex;gap:8px;flex-wrap:wrap">
+    <a class="btn sm ghost" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">Accueil</a>
+    <button class="btn sm ghost" id="annexbtn" onclick="toggleAnnexes()">Annexes</button>
+    <button class="btn sm ghost" onclick="teacher()">Accès enseignant</button>
+    <button class="btn" id="endbtn" onclick="reveal()" disabled>Terminer et corriger</button>
+  </span>
+</footer>
+
+<script>
+const DOCS = {
+1:{t:"Les Serres du Thérain — chiffres clés", h:`
+<div class="wrap"><table>
+<tr><th>Indicateur</th><th>2022</th><th>2026</th></tr>
+<tr><td>Chiffre d'affaires</td><td class="n">980 800 €</td><td class="n">1 241 000 €</td></tr>
+<tr><td>Effectif (dont saisonniers)</td><td class="n">12 (2)</td><td class="n">14 (3)</td></tr>
+<tr><td>Clients au fichier</td><td class="n">2 400</td><td class="n">3 100</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Segment</th><th>CA 2022</th><th>Part</th><th>CA 2026</th><th>Part</th></tr>
+<tr><td>Particuliers</td><td class="n">471 000 €</td><td class="n">48,0 %</td><td class="n">546 000 €</td><td class="n">44,0 %</td></tr>
+<tr><td>Collectivités</td><td class="n">240 000 €</td><td class="n">24,5 %</td><td class="n">285 000 €</td><td class="n">23,0 %</td></tr>
+<tr><td>Paysagistes</td><td class="n">230 600 €</td><td class="n">23,5 %</td><td class="n">285 900 €</td><td class="n">23,0 %</td></tr>
+<tr><td>Vente en ligne</td><td class="n">39 200 €</td><td class="n">4,0 %</td><td class="n">124 100 €</td><td class="n">10,0 %</td></tr>
+<tr><td><b>Total</b></td><td class="n"><b>980 800 €</b></td><td class="n">100 %</td><td class="n"><b>1 241 000 €</b></td><td class="n">100 %</td></tr>
+</table></div>`},
+2:{t:"Extraits de l'étude conduite en janvier 2026", h:`
+<p><b>Volet 1 — questionnaire en ligne, 300 réponses exploitables.</b></p>
+<div class="wrap"><table>
+<tr><th>Question posée</th><th>Résultats</th></tr>
+<tr><td>« Vous sentez-vous capable d'entretenir seul(e) une plante ? »</td><td>Oui : 38 % — Non ou plutôt non : <b>62 %</b></td></tr>
+<tr><td>« Quel est le principal frein à un achat de végétal ? »</td><td>Ne pas savoir l'entretenir : <b>41 %</b> — Manque de temps : 27 % — Prix : 18 % — Manque de place : 14 %</td></tr>
+<tr><td>« Seriez-vous intéressé(e) par un abonnement mensuel plante + conseil ? »</td><td>Oui : <b>34 %</b></td></tr>
+<tr><td>Aux 34 % intéressés : « Accepteriez-vous d'y consacrer 29 € par mois ? »</td><td>Oui : <b>45 %</b> de ces répondants</td></tr>
+</table></div>
+<p><b>Volet 2 — trois entretiens individuels d'une heure, février 2026.</b></p>
+<blockquote>« J'ai acheté trois fois le même arbuste. Les trois fois il est mort. Je n'ose plus, en fait. Ce n'est pas une question d'argent, c'est que j'ai l'impression de gâcher. » — Femme, 34 ans, Beauvais.</blockquote>
+<blockquote>« Ce que j'aimerais, c'est qu'on me dise quoi faire, quand. Pas un livre : quelqu'un. » — Homme, 41 ans, Compiègne.</blockquote>
+<blockquote>« Aller à la jardinerie, c'est une expédition. Si on me le mettait de côté et que je passais le prendre, ce serait réglé. » — Femme, 29 ans, Beauvais.</blockquote>`},
+3:{t:"Le marché du végétal d'ornement dans l'Oise", h:`
+<p>Le marché régional du végétal d'ornement destiné aux particuliers progresse d'environ 2 % par an. Trois évolutions le traversent : le vieillissement de la clientèle traditionnelle de jardiniers expérimentés, l'arrivée d'une clientèle urbaine plus jeune mais moins expérimentée, et la montée des étés secs qui modifie les espèces recherchées.</p>
+<p><b>Concurrence directe :</b> deux autres horticulteurs producteurs dans un rayon de 40 km, quatre jardineries de chaîne, dont deux ont ouvert un service de retrait en 2024.</p>
+<p><b>Concurrence indirecte :</b> rayons végétaux des grandes surfaces alimentaires (prix bas, conseil inexistant), fleuristes, plateformes de vente en ligne nationales livrant en 48 heures, et échanges gratuits entre particuliers sur les réseaux sociaux locaux.</p>`},
+4:{t:"Extrait du carnet de veille tenu par la gérante", h:`
+<div class="wrap"><table>
+<tr><th>Source suivie</th><th>Rythme</th><th>Élément relevé en 2026</th></tr>
+<tr><td>Sites et catalogues des quatre jardineries concurrentes</td><td>Mensuel</td><td>Deux d'entre elles proposent une « garantie reprise » d'un an sur les arbustes.</td></tr>
+<tr><td>Groupes de jardinage locaux sur les réseaux sociaux</td><td>Hebdomadaire</td><td>Les questions d'entretien sont dix fois plus nombreuses que les questions d'achat.</td></tr>
+<tr><td>Publications de la chambre d'agriculture</td><td>Trimestriel</td><td>Restrictions d'arrosage estival étendues à 42 communes en 2025.</td></tr>
+<tr><td>Avis en ligne sur l'entreprise</td><td>Hebdomadaire</td><td>Note 4,6/5 ; les avis négatifs portent presque tous sur l'absence de suivi après l'achat.</td></tr>
+</table></div>`},
+5:{t:"Compte de résultat simplifié et bilan — 2026", h:`
+<div class="wrap"><table>
+<tr><th>Compte de résultat simplifié</th><th>Montant (€)</th></tr>
+<tr><td>Chiffre d'affaires</td><td class="n">1 241 000</td></tr>
+<tr><td>Achats de matières et de marchandises consommés</td><td class="n">402 000</td></tr>
+<tr><td>Autres achats et charges externes</td><td class="n">195 000</td></tr>
+<tr><td>Charges de personnel</td><td class="n">428 000</td></tr>
+<tr><td>Impôts et taxes</td><td class="n">34 000</td></tr>
+<tr><td>Dotations aux amortissements</td><td class="n">81 000</td></tr>
+<tr><td>Charges d'intérêts</td><td class="n">19 000</td></tr>
+<tr><td>Impôt sur les bénéfices</td><td class="n">20 000</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Bilan au 31 décembre 2026</th><th>Montant (€)</th></tr>
+<tr><td>Total de l'actif</td><td class="n">890 000</td></tr>
+<tr><td>Capitaux propres</td><td class="n">412 000</td></tr>
+<tr><td>Dettes</td><td class="n">478 000</td></tr>
+</table></div>
+<p class="lede">Taux de valeur ajoutée moyen de la filière horticole : 48 %. Aucun dividende n'a été distribué en 2026.</p>`},
+6:{t:"Les Jardins de Voisinlieu — rapport d'activité 2026", h:`
+<p>Association d'insertion par l'activité économique installée à Beauvais, exploitant trois hectares de jardins maraîchers et d'espaces verts urbains. Dix-huit personnes en parcours d'insertion, encadrées par trois permanents.</p>
+<div class="wrap"><table>
+<tr><th>Élément</th><th>2026</th></tr>
+<tr><td>Recettes totales</td><td class="n">210 000 €</td></tr>
+<tr><td>dont subventions publiques</td><td class="n">60 % des recettes</td></tr>
+<tr><td>Résultat de l'exercice</td><td class="n">0 €</td></tr>
+<tr><td>Personnes accompagnées dans l'année</td><td class="n">18</td></tr>
+<tr><td>Personnes ayant retrouvé un contrat à la sortie</td><td class="n">11</td></tr>
+<tr><td>Surface entretenue en zone urbaine</td><td class="n">3 hectares</td></tr>
+</table></div>
+<blockquote>« Notre résultat est nul, et c'est normal : tout ce que nous produisons est réinvesti dans l'accompagnement. Mesurer ce que nous valons avec un compte de résultat, c'est mesurer une distance avec une balance. » — éditorial du président.</blockquote>`},
+7:{t:"Note de projet — Le Panier du Thérain", h:`
+<p><b>Principe.</b> Un abonnement mensuel sans engagement de durée. Chaque mois, l'abonné reçoit une plante de saison adaptée à son exposition, une fiche d'entretien et un accès à un conseil téléphonique. Retrait sur place ou livraison dans un rayon de 25 km. <b>Prix : 29 € par mois.</b></p>
+<div class="wrap"><table>
+<tr><th>Élément de coût</th><th>Montant</th></tr>
+<tr><td>Plante, par panier</td><td class="n">9,00 €</td></tr>
+<tr><td>Emballage et fiche d'entretien, par panier</td><td class="n">1,50 €</td></tr>
+<tr><td>Préparation et livraison, par panier</td><td class="n">3,50 €</td></tr>
+<tr><td>Salarié dédié au conseil (mi-temps), par an</td><td class="n">19 200 €</td></tr>
+<tr><td>Site de commande et abonnement logiciel, par an</td><td class="n">4 800 €</td></tr>
+<tr><td>Communication de lancement, par an</td><td class="n">6 000 €</td></tr>
+</table></div>
+<p><b>Réserve du comptable :</b> « L'entreprise n'a jamais géré de relation mensuelle avec un client. Il faudra tenir le rythme douze mois sur douze, alors que nos équipes sont saisonnières. Et un abonné qui part au bout de trois mois nous aura coûté plus qu'il ne nous aura rapporté. »</p>`}
+};
+const Q = {
+m1:[
+ {id:"1.1",type:"multi",docs:[3],t:"Parmi ces éléments du document 3, lesquels relèvent de l'<b>environnement</b> du marché (et non de l'offre ou de la demande) ?",
+  opts:["La croissance du marché limitée à 2 % par an","Les quatre jardineries de chaîne concurrentes","Les restrictions d'arrosage liées aux étés secs","L'arrivée d'une clientèle urbaine moins expérimentée"],
+  ok:[0,2], ex:"L'environnement regroupe ce qui s'impose à l'organisation sans qu'elle le contrôle : conjoncture du marché, climat, réglementation. Les jardineries relèvent de l'<b>offre</b>, la clientèle urbaine de la <b>demande</b>."},
+ {id:"1.2",type:"qcm",docs:[2],t:"Le volet 2 du document 2 (trois entretiens d'une heure) est :",
+  opts:["une étude quantitative, car elle porte sur des personnes réelles","une étude qualitative, car elle explique les comportements sur un petit effectif non représentatif","une veille, car elle est menée régulièrement","une étude documentaire, car elle reprend des informations existantes"],
+  ok:1, ex:"Trois entretiens ne permettent aucune extrapolation : on ne cherche pas à mesurer mais à comprendre. Le volet 1, lui, est quantitatif (300 réponses, résultats chiffrés)."},
+ {id:"1.3a",type:"num",docs:[2],t:"Sur les 300 répondants, combien se déclarent incapables d'entretenir seuls une plante ?",
+  ans:186, tol:0.5, unit:"répondants", ex:"300 × 0,62 = <b>186 répondants</b>."},
+ {id:"1.3b",type:"num",docs:[2],t:"Quelle part des 300 répondants est à la fois intéressée par l'abonnement <b>et</b> prête à payer 29 € par mois ? (en %, une décimale)",
+  ans:15.3, tol:0.15, unit:"%", ex:"0,34 × 0,45 = 0,153 → <b>15,3 %</b>. Le second taux porte sur les 34 % intéressés, pas sur l'ensemble : on multiplie, on n'additionne pas.",
+  hint:"Le second pourcentage ne porte pas sur l'ensemble de l'échantillon."},
+ {id:"1.4a",type:"num",docs:[1,2],t:"En appliquant ce taux aux 3 100 clients du fichier, combien d'abonnés potentiels estimez-vous ? (arrondi à l'unité)",
+  ans:474, tol:2, unit:"abonnés", ex:"3 100 × 0,153 = <b>474 abonnés potentiels</b>."},
+ {id:"1.4b",type:"multi",docs:[2],t:"Quelles sont les limites de cette estimation ? (plusieurs réponses)",
+  opts:["Une intention déclarée n'est pas un achat effectif","Le calcul est mathématiquement faux","Les 300 répondants sont des clients déjà acquis, donc plus favorables que la population générale","Accepter un prix dans un questionnaire n'engage à rien"],
+  ok:[0,2,3], ex:"Le calcul est juste ; c'est sa portée qui est limitée. Échantillon non représentatif du marché et écart systématique entre intention et achat sont les deux limites majeures."},
+ {id:"1.5",type:"qcm",docs:[4],t:"Le document 4 relève :",
+  opts:["d'une étude, car il produit des informations sur le marché","d'une veille, car il est permanent, périodique, et ne répond à aucune question posée à l'avance","d'une étude qualitative, car il contient des observations","d'un plan de marchéage"],
+  ok:1, ex:"Les rythmes (mensuel, hebdomadaire, trimestriel) et l'absence de question de départ sont les deux marqueurs de la veille. L'étude, elle, est ponctuelle et répond à une question précise."},
+ {id:"1.6",type:"assoc",docs:[4],t:"Rattachez chaque signal de veille à la composante du marché concernée.",
+  items:[["Garantie reprise proposée par deux concurrentes","Offre"],
+         ["Questions d'entretien dix fois plus nombreuses que les questions d'achat","Demande"],
+         ["Restrictions d'arrosage étendues à 42 communes","Environnement"],
+         ["Avis négatifs portant sur l'absence de suivi après l'achat","Demande"]],
+  choices:["Offre","Demande","Environnement"],
+  ex:"Un concurrent relève de l'offre ; un comportement ou une attente de client relève de la demande ; une contrainte subie relève de l'environnement."},
+ {id:"1.7",type:"qcm",docs:[2,3],t:"Quelle approche marketing l'entreprise adopte-t-elle avec le projet d'abonnement ?",
+  opts:["Réactive : elle répond à une demande exprimée","Créative : elle suscite un besoin que le marché n'avait pas formulé","Médiatrice : elle met en relation deux catégories d'acteurs","Aucune, il s'agit de marketing opérationnel"],
+  ok:1, ex:"Aucun client n'a réclamé un abonnement de plantes. L'étude révèle un frein, pas une demande de produit. On accepte aussi <b>anticipatrice</b> si l'on insiste sur le besoin latent : le frein existe déjà et l'offre le devance. On refuse « réactive »."},
+ {id:"1.8",type:"text",docs:[2],t:"Rédigez : que le volet qualitatif apporte-t-il que le volet quantitatif ne pouvait pas apporter ? (5 lignes)",
+  ex:"Le quantitatif mesure l'ampleur du frein : 62 % des clients ne se sentent pas capables d'entretenir une plante, et 41 % citent ce frein en premier. Le qualitatif en révèle la <b>nature</b> : ce n'est pas une ignorance technique mais un sentiment de gâcher, et l'attente n'est pas une documentation mais une personne. Aucun questionnaire n'aurait produit cette information, parce qu'il aurait fallu poser la question pour obtenir la réponse — or on ne la connaissait pas."}
+],
+m2:[
+ {id:"2.1",type:"num",docs:[5],t:"Calculez la valeur ajoutée réalisée en 2026, en euros.",
+  ans:644000, tol:100, unit:"€", ex:"Consommations intermédiaires = 402 000 + 195 000 = 597 000 €. VA = 1 241 000 − 597 000 = <b>644 000 €</b>. Les charges de personnel n'en font pas partie : elles sont financées <i>par</i> la valeur ajoutée.",
+  hint:"Ne comptez que ce qui a été acheté à d'autres organisations."},
+ {id:"2.2a",type:"num",docs:[5],t:"Calculez le taux de valeur ajoutée (en %, une décimale).",
+  ans:51.9, tol:0.15, unit:"%", ex:"644 000 ÷ 1 241 000 = <b>51,9 %</b>."},
+ {id:"2.2b",type:"qcm",docs:[5],t:"Le taux de la filière est de 48 %. Que révèle l'écart ?",
+  opts:["L'entreprise est plus rentable que ses concurrentes","L'entreprise réalise elle-même une part plus grande de son activité au lieu d'acheter pour revendre","L'entreprise vend plus cher que ses concurrentes","L'entreprise emploie moins de salariés"],
+  ok:1, ex:"Le taux de VA mesure la part de l'activité réalisée en interne. Ici, l'entreprise <b>produit</b> les végétaux qu'elle vend. Il ne dit rien de la rentabilité, qui se mesure avec le résultat."},
+ {id:"2.3",type:"num",docs:[5],t:"Quelle part de la valeur ajoutée revient aux salariés ? (en %, une décimale)",
+  ans:66.5, tol:0.2, unit:"%", ex:"428 000 ÷ 644 000 = <b>66,5 %</b>. Partage complet : salariés 66,5 % · État (34 000 + 20 000) 8,4 % · prêteurs 2,9 % · entreprise (81 000 + 62 000) 22,2 %."},
+ {id:"2.4",type:"num",docs:[5],t:"Le comité social demande + 3 % de salaires. Quel est le coût de cette mesure, en euros ?",
+  ans:12840, tol:20, unit:"€", ex:"428 000 × 0,03 = <b>12 840 €</b>. C'est environ un cinquième du résultat net (62 000 €) : absorbable une fois, mais autant de moins pour financer le projet d'abonnement."},
+ {id:"2.5a",type:"num",docs:[5],t:"Calculez l'excédent brut d'exploitation, en euros.",
+  ans:182000, tol:100, unit:"€", ex:"644 000 − 428 000 − 34 000 = <b>182 000 €</b>."},
+ {id:"2.5b",type:"num",docs:[5],t:"Calculez le résultat net, en euros.",
+  ans:62000, tol:100, unit:"€", ex:"Résultat d'exploitation = 182 000 − 81 000 = 101 000 €. Résultat net = 101 000 − 19 000 − 20 000 = <b>62 000 €</b>."},
+ {id:"2.5c",type:"num",docs:[5],t:"Calculez la rentabilité financière (en %, une décimale).",
+  ans:15.0, tol:0.2, unit:"%", ex:"62 000 ÷ 412 000 = <b>15,0 %</b>. La rentabilité économique, elle, vaut 101 000 ÷ 890 000 = 11,3 %."},
+ {id:"2.6",type:"qcm",docs:[5],t:"« Avec 644 000 € de valeur ajoutée, cette entreprise gagne très bien sa vie. » Cette phrase est :",
+  opts:["exacte, la valeur ajoutée est le bénéfice","fausse : la VA est la richesse créée avant rémunération des salariés, de l'État et des prêteurs ; il ne reste que 62 000 €","fausse : la valeur ajoutée ne se calcule pas ainsi","exacte, car le taux de VA dépasse celui de la filière"],
+  ok:1, ex:"Sur 644 000 € créés, l'entreprise conserve 62 000 €, soit 5 centimes par euro vendu. Créer beaucoup de richesse et en conserver peu sont deux choses différentes."},
+ {id:"2.7a",type:"num",docs:[1],t:"La part des particuliers passe de 48,0 % à 44,0 %. Quelle est la variation, en points ?",
+  ans:-4, tol:0.15, unit:"points", ex:"44,0 − 48,0 = <b>− 4,0 points</b>. On soustrait deux pourcentages : le résultat s'exprime en points.",
+  hint:"Écrivez le signe."},
+ {id:"2.7b",type:"num",docs:[1],t:"Quel est le taux de variation du chiffre d'affaires des particuliers entre 2022 et 2026 ? (en %, une décimale)",
+  ans:15.9, tol:0.25, unit:"%", ex:"(546 000 − 471 000) ÷ 471 000 = <b>+ 15,9 %</b>. Le CA augmente, mais moins vite que les autres segments : la part relative diminue. Les deux résultats ne se contredisent pas."},
+ {id:"2.8a",type:"num",docs:[6],t:"Les Jardins de Voisinlieu : calculez le taux de retour à l'emploi (en %, une décimale).",
+  ans:61.1, tol:0.3, unit:"%", ex:"11 ÷ 18 = <b>61,1 %</b>. Coût par bénéficiaire : 210 000 ÷ 18 = 11 667 €."},
+ {id:"2.8b",type:"text",docs:[6],t:"Expliquez la phrase du président : « mesurer ce que nous valons avec un compte de résultat, c'est mesurer une distance avec une balance ». (5 lignes)",
+  ex:"L'instrument de mesure doit correspondre à la nature de ce qu'il mesure. Le compte de résultat mesure une valeur <b>financière</b> : des produits, des charges, un résultat. Or la valeur créée par l'association est <b>sociale</b> : onze retours à l'emploi sur dix-huit parcours, trois hectares entretenus en ville. Cette valeur est réelle mais n'a pas de contrepartie monétaire, donc elle n'apparaît dans aucun compte. Il faut d'autres indicateurs : activité, impact, efficience."}
+],
+m3:[
+ {id:"3.1",type:"qcm",docs:[7],t:"De quel type d'innovation s'agit-il ?",
+  opts:["Innovation de procédé : la façon de produire change","Innovation de modèle économique : la manière de vendre et d'être payé change","Innovation radicale de produit : la plante est nouvelle","Ce n'est pas une innovation"],
+  ok:1, ex:"Le produit vendu reste une plante. Ce qui change, c'est le passage d'une vente ponctuelle à un revenu mensuel récurrent, assorti d'un service de conseil. Pour cette entreprise, l'innovation est <b>radicale</b> : elle transforme sa relation client et sa saisonnalité."},
+ {id:"3.2",type:"num",docs:[7],t:"Calculez la marge dégagée par abonné et par mois, en euros.",
+  ans:15, tol:0.05, unit:"€", ex:"Coût variable = 9,00 + 1,50 + 3,50 = 14 €. Marge = 29 − 14 = <b>15 € par mois</b>, soit 180 € par an."},
+ {id:"3.3",type:"num",docs:[7],t:"Calculez le total des charges fixes annuelles du projet, en euros.",
+  ans:30000, tol:10, unit:"€", ex:"19 200 + 4 800 + 6 000 = <b>30 000 €</b>."},
+ {id:"3.4",type:"num",docs:[7],t:"À partir de combien d'abonnés le projet couvre-t-il ses charges fixes ?",
+  ans:167, tol:0.5, unit:"abonnés", ex:"30 000 ÷ 180 = 166,7 → <b>167 abonnés</b>. On arrondit à l'entier <b>supérieur</b> : 166 abonnés ne couvrent pas les charges. Le seuil représente environ 35 % du potentiel estimé en mission 1.",
+  hint:"Un abonné n'est pas divisible. Dans quel sens arrondir ?"},
+ {id:"3.5a",type:"num",docs:[7],t:"Avec 200 abonnés, quel est le résultat annuel du projet, en euros ?",
+  ans:6000, tol:20, unit:"€", ex:"Marge totale = 200 × 180 = 36 000 €. Résultat = 36 000 − 30 000 = <b>6 000 €</b>. Chiffre d'affaires du projet : 200 × 29 × 12 = 69 600 €."},
+ {id:"3.5b",type:"num",docs:[1,7],t:"Quelle part du chiffre d'affaires total de l'entreprise ce projet représenterait-il ? (en %, une décimale)",
+  ans:5.6, tol:0.2, unit:"%", ex:"69 600 ÷ 1 241 000 = <b>5,6 %</b>. À faire remarquer : 5,6 % du chiffre d'affaires pour 6 000 € de résultat, sur une activité entièrement nouvelle."},
+ {id:"3.6",type:"num",docs:[7],t:"Si le prix passait de 29 € à 25 €, combien d'abonnés faudrait-il pour couvrir les charges fixes ?",
+  ans:228, tol:0.5, unit:"abonnés", ex:"Nouvelle marge = 25 − 14 = 11 €/mois, soit 132 €/an. 30 000 ÷ 132 = 227,3 → <b>228 abonnés</b>. Une baisse de prix de 13,8 % fait bondir le seuil de 36,5 % : le projet est très sensible au prix. C'est l'argument décisif contre toute promotion de lancement agressive."},
+ {id:"3.7",type:"qcm",docs:[7],t:"Quelle est la principale fragilité du modèle par abonnement, et la réserve du comptable la rejoint-elle ?",
+  opts:["Le taux de conversion vers l'offre payante est faible — non, il parle d'autre chose","Il faut conserver l'abonné, car le coût d'acquisition n'est amorti qu'au bout de plusieurs mois — oui, c'est exactement sa réserve","Il faut atteindre une taille critique par effet de réseau — oui","La dépendance au marché publicitaire — oui"],
+  ok:1, ex:"L'effet de réseau concerne les plateformes, le taux de conversion le freemium, la publicité les modèles gratuits. Ici : un abonné qui part au bout de trois mois a rapporté 45 € de marge, insuffisants pour couvrir sa part de communication et de mise en service."}
+],
+syn:[
+ {id:"S",type:"text",docs:[1,2,5,7],rows:16,t:"<b>Claire Vasseur vous demande une note argumentée : doit-elle lancer Le Panier du Thérain ?</b><br><br>Mobilisez les trois missions : le besoin est-il établi et par quelles sources le sait-on ? l'entreprise a-t-elle les moyens de ce projet et que révèlent ses indicateurs ? le modèle économique est-il viable et quelles sont ses fragilités ? Concluez par une recommandation nette, assortie d'au moins une condition de réussite. Une trentaine de lignes.",
+  ex:"<b>Trois temps et une décision.</b><br><br><b>1. Le besoin est établi.</b> 62 % des clients ne se sentent pas capables d'entretenir une plante ; le premier frein est le savoir-faire (41 %) et non le prix (18 %). Les entretiens en révèlent la nature affective — le sentiment de gâcher — et l'attente d'un accompagnement humain. La veille le confirme : les questions d'entretien dominent les réseaux locaux et les avis négatifs portent sur l'absence de suivi.<br><br><b>2. L'entreprise a les moyens, sans excès.</b> 644 000 € de valeur ajoutée, un taux de 51,9 % supérieur aux 48 % de la filière, des rentabilités correctes (15,0 % et 11,3 %). Mais un résultat net de 62 000 € seulement, soit 5 centimes par euro vendu, face à un projet qui engage 30 000 € de charges fixes annuelles.<br><br><b>3. Le modèle tient, à condition de garder les abonnés.</b> Seuil à 167 abonnés pour un potentiel estimé à 474 — atteignable, mais l'écart entre intention et achat réduit fortement cette marge. Sensibilité au prix très forte : à 25 €, le seuil monte à 228 abonnés. Fragilité structurelle de l'abonnement : la rétention.<br><br><b>Recommandation.</b> Lancer, à prix maintenu à 29 €, sur une phase test limitée dans le temps et en volume, avec un objectif de rétention explicite suivi mois par mois. <i>Une recommandation inverse est recevable si elle s'appuie sur la saisonnalité des équipes et sur la faiblesse du résultat rapporté au risque.</i>"}
+]};
+const LEX=[
+{id:"C1",b:"A",t:"Définissez le <b>marketing</b> (mercatique) et distinguez-le de la vente.",
+ kw:[["besoin"],["offre","produit","service"],["avant","concev","adopt"]],
+ ref:"Ensemble des techniques et actions par lesquelles une organisation cherche à connaître les besoins d'un public, à concevoir une offre qui y réponde et à la faire adopter. Le marketing intervient <b>avant</b> la conception du produit ; la vente intervient après, pour écouler un produit déjà conçu."},
+{id:"C2",b:"A",t:"Citez et expliquez les <b>quatre étapes de la démarche marketing</b>.",
+ kw:[["analys"],["decid","segment","cibl","position"],["agir","marcheage","4 p","operationnel"],["control"]],
+ ref:"1. <b>Analyser</b> : connaître le marché, la demande, la concurrence, l'environnement. 2. <b>Décider</b> : segmenter, cibler, positionner. 3. <b>Agir</b> : construire le plan de marchéage (produit, prix, distribution, communication). 4. <b>Contrôler</b> : mesurer les résultats et corriger. La démarche est un cycle, pas une ligne droite."},
+{id:"C3",b:"A",t:"Distinguez <b>marketing stratégique</b> et <b>marketing opérationnel</b>.",
+ kw:[["strateg","long terme","cible","position"],["operationnel","marcheage","action","4 p"]],
+ ref:"Le marketing <b>stratégique</b> regroupe les choix de long terme : quel marché, quelle cible, quel positionnement. Le marketing <b>opérationnel</b> regroupe les actions concrètes qui les mettent en œuvre, c'est-à-dire le plan de marchéage. Le second découle du premier : on ne choisit pas un prix avant d'avoir choisi une cible."},
+{id:"C4",b:"A",t:"Qu'est-ce qu'une <b>approche marketing réactive</b> ? Et une <b>approche anticipatrice</b> ?",
+ kw:[["reactiv","exprim","existant","deja"],["anticip","latent","avant","devance"]],
+ ref:"<b>Réactive</b> : l'organisation répond à un besoin déjà exprimé par le marché, elle s'adapte à une demande existante. <b>Anticipatrice</b> : elle identifie un besoin latent, non encore exprimé, et prépare l'offre avant que la demande n'apparaisse."},
+{id:"C5",b:"A",t:"Qu'est-ce qu'une <b>approche créative</b> ? Et une <b>approche médiatrice</b> ? Donnez un exemple de chacune.",
+ kw:[["creativ","suscit","cree un besoin","rupture","non formul"],["mediatr","relation","intermedi","plateforme","deux"]],
+ ref:"<b>Créative</b> : l'organisation crée un besoin que le consommateur n'avait pas formulé, souvent par une innovation de rupture — par exemple l'abonnement mensuel de plantes. <b>Médiatrice</b> : elle met en relation deux catégories d'acteurs et tire sa valeur de cette mise en relation — par exemple une place de marché entre producteurs et paysagistes. C'est le fondement des plateformes."},
+{id:"C6",b:"A",t:"Qu'appelle-t-on un <b>marché</b> ? Citez ses trois composantes.",
+ kw:[["offre"],["demande"],["environnement"],["rencontre","lieu","bien","service"]],
+ ref:"Lieu, physique ou non, de rencontre entre une offre et une demande pour un bien ou un service donné. Trois composantes : la <b>demande</b> (consommateurs, prescripteurs, non-consommateurs), l'<b>offre</b> (concurrence directe et indirecte) et l'<b>environnement</b> (réglementation, climat, revenus, technologies)."},
+{id:"C7",b:"A",t:"Distinguez <b>concurrence directe</b> et <b>concurrence indirecte</b>. Donnez un exemple de chacune.",
+ kw:[["direct","meme produit","meme type"],["indirect","different","meme besoin","substitu"]],
+ ref:"<b>Directe</b> : des organisations qui proposent le même type de produit — pour Les Serres, les autres horticulteurs et les jardineries. <b>Indirecte</b> : des produits différents qui répondent au même besoin — les grandes surfaces, les fleuristes, les plateformes de vente en ligne, voire les échanges gratuits entre particuliers."},
+{id:"C8",b:"A",t:"Qu'est-ce qu'un <b>prescripteur</b> ? Et un <b>non-consommateur relatif</b> ?",
+ kw:[["prescript","conseil","influ","recommand"],["relatif","pourrait","futur","pas encore","demain"]],
+ ref:"Le <b>prescripteur</b> conseille ou influence l'achat sans nécessairement l'effectuer : paysagiste, magazine, influenceur, médecin. Le <b>non-consommateur relatif</b> n'achète pas aujourd'hui mais pourrait le faire demain, si un frein était levé ; le non-consommateur absolu n'achètera jamais."},
+{id:"C9",b:"A",t:"Distinguez <b>étude quantitative</b> et <b>étude qualitative</b> : à quelle question chacune répond-elle ?",
+ kw:[["quantitat","combien","chiffr","echantillon","representat"],["qualitat","pourquoi","comprend","entretien","petit"]],
+ ref:"L'étude <b>quantitative</b> répond à « combien ? » : elle mesure sur un échantillon représentatif et produit des résultats chiffrés extrapolables (questionnaire, sondage, panel). L'étude <b>qualitative</b> répond à « pourquoi ? » : elle explique les comportements sur un petit effectif non représentatif (entretien, réunion de groupe, observation)."},
+{id:"C10",b:"A",t:"Distinguez <b>source primaire</b> et <b>source secondaire</b>.",
+ kw:[["primaire","elle-meme","soi","propre","produite par l"],["secondaire","existante","autres","reutilis","insee"]],
+ ref:"Une source <b>primaire</b> est une information produite par l'organisation elle-même pour son besoin propre : son questionnaire, ses entretiens. Une source <b>secondaire</b> est une information existante, produite par d'autres et réutilisée : INSEE, syndicat professionnel, presse. Les secondaires coûtent moins cher et se consultent en premier."},
+{id:"C11",b:"A",t:"Qu'est-ce que la <b>veille marketing et commerciale</b> ? En quoi diffère-t-elle d'une étude ?",
+ kw:[["permanent","continu","reguli"],["environnement","concurrent","surveill"],["etude","ponctuel","question"]],
+ ref:"Surveillance <b>permanente</b> et organisée de l'environnement — concurrents, clients, technologies, réglementation — destinée à détecter assez tôt les signaux de changement. L'étude est <b>ponctuelle</b> et répond à une question posée à l'avance ; la veille est permanente et sert précisément à repérer ce qu'on ne cherchait pas."},
+{id:"C12",b:"A",t:"Que sont les <b>données massives</b> (big data) ? Citez leurs trois caractéristiques et une limite.",
+ kw:[["volume"],["variet","format","divers"],["vitesse","rapid","temps reel"],["rgpd","donnees personnelles","cout","limite","juridique"]],
+ ref:"Données de très grand <b>volume</b>, de formats <b>variés</b> (chiffres, textes, images) et produites à grande <b>vitesse</b>. Exploitées par des algorithmes, elles permettent de mieux connaître le client, de prévoir et de personnaliser. Limites : le coût des outils et des compétences, et le cadre juridique de la protection des données personnelles (RGPD)."},
+{id:"C13",b:"B",t:"Qu'est-ce que la <b>création de valeur</b> ? Citez ses trois formes.",
+ kw:[["financ","richesse","resultat"],["percue","client","subjectiv"],["social","societ","environnement"]],
+ ref:"Capacité d'une organisation à produire davantage qu'elle ne consomme. Trois formes : la valeur <b>financière</b> (richesse créée et répartie, mesurée par la valeur ajoutée et le résultat), la valeur <b>perçue</b> (ce que le client estime recevoir, subjective), et la valeur <b>sociale et environnementale</b> (effets utiles pour la collectivité, y compris sans contrepartie monétaire)."},
+{id:"C14",b:"B",t:"Définissez la <b>valeur ajoutée</b> et donnez sa formule.",
+ kw:[["richesse","creee"],["production","chiffre d","ca"],["consommations intermediaires","ci","achats"]],
+ ref:"Richesse effectivement créée par l'organisation au cours d'un exercice. <b>Valeur ajoutée = Production (chiffre d'affaires) − Consommations intermédiaires.</b> Elle mesure ce que vaut la production diminué de ce qui a été acheté à d'autres pour la réaliser."},
+{id:"C15",b:"B",t:"Que sont les <b>consommations intermédiaires</b> ? Citez deux éléments qui n'en font pas partie.",
+ kw:[["achat","matiere","marchandise","charges externes"],["autres organisations","exterieur","achete a"],["salaire","personnel","amortissement","impot"]],
+ ref:"Biens et services achetés à d'autres organisations et consommés dans l'activité : achats de matières et de marchandises, autres achats et charges externes (énergie, transport, assurances, sous-traitance, loyers). N'en font <b>pas</b> partie : les salaires, les impôts et taxes, les dotations aux amortissements — ils sont financés <i>par</i> la valeur ajoutée, ils viennent après son calcul."},
+{id:"C16",b:"B",t:"Qu'indique le <b>taux de valeur ajoutée</b> ? Comment le calcule-t-on ?",
+ kw:[["va","valeur ajoutee"],["chiffre d","ca"],["part","elle-meme","transform","interne","realise"]],
+ ref:"<b>Taux de VA = Valeur ajoutée ÷ Chiffre d'affaires.</b> Il indique la part de l'activité que l'organisation réalise elle-même. Un taux élevé signale une organisation qui transforme beaucoup et achète peu à l'extérieur ; un taux faible, une organisation qui revend ou sous-traite l'essentiel."},
+{id:"C17",b:"B",t:"Entre qui la <b>valeur ajoutée</b> se partage-t-elle ? Sous quelles formes ?",
+ kw:[["salari","personnel"],["etat","impot"],["preteur","banque","interet"],["entreprise","autofinancement","associ","dividende"]],
+ ref:"Entre les <b>salariés</b> (salaires et cotisations), l'<b>État</b> (impôts, taxes, impôt sur les bénéfices), les <b>prêteurs</b> (charges d'intérêts) et l'<b>organisation elle-même</b> (amortissements et résultat conservé, soit l'autofinancement). Lorsqu'elle distribue des dividendes, une part revient aux associés ou actionnaires."},
+{id:"C18",b:"B",t:"Distinguez <b>excédent brut d'exploitation</b>, <b>résultat d'exploitation</b> et <b>résultat net</b>.",
+ kw:[["ebe","personnel","impots et taxes"],["exploitation","amortissement","dotation"],["net","financier","interet","impot sur les benefices"]],
+ ref:"<b>EBE</b> = VA − charges de personnel − impôts et taxes : ce que dégage l'exploitation avant toute politique d'investissement et de financement. <b>Résultat d'exploitation</b> = EBE − dotations aux amortissements : la performance du métier lui-même. <b>Résultat net</b> = résultat d'exploitation − charges financières − impôt sur les bénéfices : ce qui reste in fine."},
+{id:"C19",b:"B",t:"Distinguez <b>rentabilité financière</b> et <b>rentabilité économique</b>.",
+ kw:[["financiere","capitaux propres","net"],["economique","actif","exploitation","moyens"]],
+ ref:"<b>Rentabilité financière = Résultat net ÷ Capitaux propres</b> : ce que rapporte l'argent apporté par les propriétaires. <b>Rentabilité économique = Résultat d'exploitation ÷ Total de l'actif</b> : ce que rapportent l'ensemble des moyens engagés, indépendamment de la façon dont ils sont financés."},
+{id:"C20",b:"B",t:"Pourquoi une valeur ajoutée élevée ne signifie-t-elle pas que l'entreprise « gagne bien sa vie » ?",
+ kw:[["avant","partage","repart"],["salaire","etat","preteur","charges"],["benefice","resultat","profit"]],
+ ref:"La valeur ajoutée est la richesse créée <b>avant</b> rémunération des salariés, de l'État et des prêteurs. Une organisation peut en créer beaucoup et perdre de l'argent si ses charges de personnel ou ses amortissements l'absorbent entièrement. La VA mesure la richesse <b>créée</b>, pas le profit <b>conservé</b>."},
+{id:"C21",b:"B",t:"Comment mesure-t-on la valeur créée par une <b>organisation non marchande</b> ? Donnez trois types d'indicateurs.",
+ kw:[["activite","beneficiaire","usager","nombre"],["impact","retour a l","effet","reduction"],["efficience","cout par","ressource"]],
+ ref:"Par des indicateurs <b>d'activité</b> (nombre de bénéficiaires, d'heures d'accompagnement, d'usagers reçus), <b>d'impact</b> (taux de retour à l'emploi, réduction mesurée d'une nuisance) et <b>d'efficience</b> (coût par bénéficiaire, part des ressources consacrée à la mission). Ces indicateurs sont plus difficiles à construire que les indicateurs financiers, mais la valeur créée est réelle."},
+{id:"C22",b:"C",t:"Distinguez <b>invention</b> et <b>innovation</b>.",
+ kw:[["invention","decouverte","technique","idee"],["innovation","marche","mise sur","commercial","rencontre"]],
+ ref:"L'innovation est l'introduction sur le <b>marché</b> d'un produit, d'un procédé ou d'une organisation nouveaux ou sensiblement améliorés. Une invention devient une innovation lorsqu'elle rencontre un marché : sans cette rencontre, elle reste une invention."},
+{id:"C23",b:"C",t:"Distinguez <b>innovation de produit</b>, <b>de procédé</b> et <b>de modèle économique</b>. Donnez un exemple de chacune.",
+ kw:[["produit","bien","service","offre"],["procede","produire","fabric","distribu","methode"],["modele economique","gagner de l","rem","revenu","vendre"]],
+ ref:"<b>De produit</b> : le bien ou le service proposé est nouveau ou nettement amélioré (une gamme de plantes résistantes à la sécheresse). <b>De procédé</b> : la façon de produire ou de distribuer change (un système de recyclage de l'eau d'irrigation). <b>De modèle économique</b> : ni le produit ni le procédé ne changent forcément, c'est la manière de gagner de l'argent qui change (vendre un abonnement plutôt qu'une plante à l'unité)."},
+{id:"C24",b:"C",t:"Distinguez innovation <b>incrémentale</b> et innovation <b>radicale</b>. Quel est l'avantage et l'inconvénient de chacune ?",
+ kw:[["incrementale","progressiv","ameliore","existant"],["radicale","rupture","obsolete","redefinit"],["risque","imit","incertitude","durable"]],
+ ref:"L'innovation <b>incrémentale</b> améliore progressivement l'existant : moins risquée, mais plus facilement imitée. L'innovation <b>radicale</b> (ou de rupture) rend l'offre antérieure obsolète et redéfinit le marché : elle peut créer un avantage durable, au prix d'une incertitude forte."},
+{id:"C25",b:"C",t:"Qu'est-ce qu'un <b>modèle économique</b> ? Quelles sont les trois questions auxquelles il répond ?",
+ kw:[["propos","valeur","qui","cible"],["produi","ressource","activite","comment"],["gagn","revenu","profit","cout","capte"]],
+ ref:"Description de la façon dont une organisation crée de la valeur, la délivre à ses clients et en capte une partie sous forme de revenus. Trois questions : <b>que proposons-nous et à qui</b> (proposition de valeur et cible) ? <b>comment le produisons-nous</b> (ressources, activités, partenaires, canaux) ? <b>comment gagnons-nous de l'argent</b> (structure des revenus et des coûts) ?"},
+{id:"C26",b:"C",t:"Qu'est-ce qu'une <b>plateforme</b> ? Qu'appelle-t-on <b>effet de réseau</b> ?",
+ kw:[["relation","intermedi","deux","met en"],["commission","prelev","revenu"],["reseau","nombre","utilisateur","croit","taille"]],
+ ref:"Modèle consistant à mettre en relation deux catégories d'utilisateurs et à prélever une commission sur la transaction. L'<b>effet de réseau</b> signifie que la valeur du service croît avec le nombre d'utilisateurs : il faut donc atteindre une taille critique, et le marché tend à se concentrer sur un ou deux acteurs."},
+{id:"C27",b:"C",t:"Distinguez le modèle de la <b>gratuité</b> et le modèle <b>freemium</b>.",
+ kw:[["gratuit","tiers","publicit","annonceur","donnee"],["freemium","base","version","payante","conversion"]],
+ ref:"Dans le modèle de la <b>gratuité</b>, le service est gratuit pour l'utilisateur et financé par un tiers, généralement l'annonceur, en contrepartie de l'attention et des données collectées. Dans le <b>freemium</b>, c'est l'utilisateur lui-même qui paie, mais seulement une minorité : une version de base gratuite attire un large public, une version enrichie est payante. Le taux de conversion y est structurellement faible."},
+{id:"C28",b:"C",t:"Qu'est-ce qu'un <b>revenu récurrent</b> ? Quelle est la principale fragilité du modèle par abonnement ?",
+ kw:[["periodique","regulier","mensuel","previsible","repet"],["conserver","fidelis","retention","depart","coeur d acquisition","cout d acquisition","amorti"]],
+ ref:"Un revenu <b>périodique et prévisible</b>, caractéristique de l'abonnement : il remplace une vente ponctuelle par un versement régulier. Sa fragilité principale est la <b>rétention</b> : le coût d'acquisition d'un abonné n'est amorti qu'au bout de plusieurs mois, de sorte qu'un abonné qui part rapidement coûte plus qu'il ne rapporte."},
+{id:"C29",b:"C",t:"Qu'est-ce que le modèle <b>low cost</b> ? Quelle en est la contrainte principale ?",
+ kw:[["essentiel","fonction","reduit","depouill","separ","option"],["volume","cout","discipline","image"]],
+ ref:"Réduire l'offre à sa fonction essentielle et facturer séparément tout le reste ; les revenus viennent du volume et des options. Contrainte : le modèle exige des volumes élevés et une discipline permanente sur les coûts, au prix d'une image dégradée."},
+{id:"C30",b:"C",t:"Pourquoi la question « comment gagne-t-on de l'argent ? » est-elle la plus décisive d'un modèle économique ?",
+ kw:[["proposition","seduis","convainc","offre"],["profit","revenu","cout","tard","compress"],["echou","viab","tient"]],
+ ref:"Beaucoup de projets ont une proposition de valeur convaincante et échouent parce que la <b>formule de profit</b> ne tient pas : les revenus arrivent trop tard, ou les coûts sont trop peu compressibles. Analyser un modèle économique, ce n'est pas décrire une offre séduisante, c'est vérifier que la valeur créée revient effectivement à l'organisation."}
+];
+
+/* =========================================================
+   MOTEUR — écran partagé, correction différée
+   ========================================================= */
+function norm(s){return (s||"").toString().trim().replace(/\s|\u00a0|€|%/g,"").replace(",",".").replace(/[^0-9.\-+]/g,"");}
+function deacc(x){return (x||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+ .replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ");}
+const ALLQ=()=>Object.values(Q).flat();
+const findQ=id=>ALLQ().find(q=>q.id===id);
+const findL=id=>LEX.find(q=>q.id===id);
+let ANS={}, SELF={}, CORR=false, CUR="s-intro";
+const MINTXT=120, MINLEX=25;
+
+function okRempli(id){
+ const v=ANS[id];
+ const q=findQ(id);
+ if(q){
+  if(q.type==="num") return v!==undefined&&norm(v)!=="";
+  if(q.type==="qcm") return Array.isArray(v)&&v.length===1;
+  if(q.type==="multi") return Array.isArray(v)&&v.length>=1;
+  if(q.type==="assoc") return Array.isArray(v)&&v.length===q.items.length&&v.every(x=>x);
+  if(q.type==="text") return typeof v==="string"&&v.trim().length>=MINTXT;
+ }
+ const l=findL(id);
+ if(l) return typeof v==="string"&&v.trim().length>=MINLEX;
+ return false;
+}
+function corrOk(id){
+ const q=findQ(id); if(!q) return SELF[id]===2;
+ const v=ANS[id];
+ if(q.type==="num"){const x=parseFloat(norm(v));return isFinite(x)&&Math.abs(x-q.ans)<=q.tol;}
+ if(q.type==="qcm") return Array.isArray(v)&&v.length===1&&v[0]===q.ok;
+ if(q.type==="multi") return Array.isArray(v)&&JSON.stringify(v.slice().sort((a,b)=>a-b))===JSON.stringify(q.ok.slice().sort((a,b)=>a-b));
+ if(q.type==="assoc") return Array.isArray(v)&&v.every((x,i)=>x===q.items[i][1]);
+ return false;
+}
+const ITEMS=()=>ALLQ().map(q=>q.id).concat(LEX.map(q=>q.id));
+const AUTO=()=>ALLQ().filter(q=>q.type!=="text").map(q=>q.id);
+const nbRempli=()=>ITEMS().filter(okRempli).length;
+
+/* ---------- navigation ---------- */
+const ORD=[["s-intro","Départ"],["s-conn","Connaissances"],["s-m1","Mission 1"],["s-m2","Mission 2"],
+ ["s-m3","Mission 3"],["s-syn","Synthèse"],["s-bilan","Bilan"]];
+const SECQ={"s-conn":()=>LEX.map(q=>q.id),"s-m1":()=>Q.m1.map(q=>q.id),
+ "s-m2":()=>Q.m2.map(q=>q.id),"s-m3":()=>Q.m3.map(q=>q.id),"s-syn":()=>Q.syn.map(q=>q.id)};
+function buildNav(){document.getElementById('nav').innerHTML=ORD.map(([id,l])=>
+ `<button id="n-${id}" onclick="go('${id}')">${l}</button>`).join("");}
+function majNav(){ORD.forEach(([id])=>{const b=document.getElementById('n-'+id);if(!b)return;
+ const f=SECQ[id]?SECQ[id]():[];
+ b.className=(id===CUR?'on':(f.length&&f.every(okRempli)?'fait':''));});}
+function go(id){CUR=id;render();const w=document.getElementById('work');if(w)w.scrollTop=0;
+ if(window.innerWidth<=1000)document.getElementById('annexes').classList.remove('show');}
+function toggleAnnexes(){document.getElementById('annexes').classList.toggle('show');}
+
+/* ---------- annexes ---------- */
+function buildAnnexes(){
+ document.getElementById('annexlist').innerHTML=Object.keys(DOCS).map(n=>
+  `<div class="acc" id="acc-${n}"><button onclick="document.getElementById('acc-${n}').classList.toggle('open')">
+   <span>Doc ${n} — ${DOCS[n].t}</span><i>+</i></button><div>${DOCS[n].h}</div></div>`).join("");
+ ["1","2"].forEach(n=>{const e=document.getElementById('acc-'+n);if(e)e.classList.add('open');});
+}
+function ouvrir(n){const e=document.getElementById('acc-'+n);if(!e)return;e.classList.add('open');
+ if(window.innerWidth<=1000)document.getElementById('annexes').classList.add('show');
+ e.scrollIntoView({block:'start'});}
+function chips(l){return (!l||!l.length)?"":`<div class="acts" style="margin:0 0 9px">`+
+ l.map(n=>`<button class="btn sm ghost" onclick="ouvrir(${n})">Annexe ${n}</button>`).join("")+`</div>`;}
+
+/* ---------- saisie ---------- */
+function setA(id,v){ANS[id]=v;majFoot();majNav();}
+function pick(id,i,multi){
+ let v=Array.isArray(ANS[id])?ANS[id].slice():[];
+ if(multi){const k=v.indexOf(i);k>=0?v.splice(k,1):v.push(i);}else v=[i];
+ ANS[id]=v;render();
+}
+function setAssoc(id,i,val){
+ const q=findQ(id);
+ let v=Array.isArray(ANS[id])?ANS[id].slice():new Array(q.items.length).fill("");
+ v[i]=val;ANS[id]=v;majFoot();majNav();
+}
+
+/* ---------- cartes ---------- */
+function carte(q){
+ const v=ANS[q.id];
+ let body="";
+ if(q.type==="num"){
+  body=`<div class="numrow"><input type="text" inputmode="decimal" value="${v===undefined?"":String(v).replace(/"/g,'&quot;')}"
+   ${CORR?"disabled":""} oninput="setA('${q.id}',this.value)"><span class="unit">${q.unit||""}</span></div>`;
+ } else if(q.type==="qcm"||q.type==="multi"){
+  const sel=Array.isArray(v)?v:[];
+  const good=q.type==="qcm"?[q.ok]:q.ok;
+  body=`<div class="opts">`+q.opts.map((o,i)=>{
+   let c="opt";
+   if(CORR){ if(good.includes(i))c+=" good"; else if(sel.includes(i))c+=" bad"; }
+   else if(sel.includes(i))c+=" sel";
+   return `<div class="${c}" ${CORR?"":`onclick="pick('${q.id}',${i},${q.type==="multi"})"`}>
+    <span class="mk">${String.fromCharCode(97+i)}</span><span>${o}</span></div>`;}).join("")+`</div>`+
+   (q.type==="multi"?`<div class="lede" style="margin-top:5px;font-size:.78rem">Plusieurs réponses possibles.</div>`:"");
+ } else if(q.type==="assoc"){
+  const sel=Array.isArray(v)?v:[];
+  body=`<div class="wrap"><table><tr><th>Élément</th><th style="width:42%">Composante</th></tr>`+
+   q.items.map((it,i)=>{
+    let st="";
+    if(CORR) st=(sel[i]===it[1])?"border-color:#a9d5c6;background:#e7f4ef":"border-color:#e2b3b3;background:#fbeeee";
+    return `<tr><td>${it[0]}</td><td><select ${CORR?"disabled":""} style="${st}" onchange="setAssoc('${q.id}',${i},this.value)">
+     <option value="">— choisir —</option>`+q.choices.map(c=>`<option ${sel[i]===c?"selected":""}>${c}</option>`).join("")+
+     `</select></td></tr>`;}).join("")+`</table></div>`;
+ } else if(q.type==="text"){
+  const n=(typeof v==="string"?v.trim().length:0);
+  body=`<textarea rows="${q.rows||7}" ${CORR?"disabled":""} oninput="setA('${q.id}',this.value)"
+   placeholder="Rédigez votre réponse ici…">${v===undefined?"":String(v)}</textarea>
+   <div class="lede" style="font-size:.78rem;margin-top:5px">${n} caractère${n>1?"s":""} — ${MINTXT} minimum pour valider le dossier.</div>`;
+ }
+ let corr="";
+ if(CORR){
+  if(q.type==="text") corr=`<div class="fb info"><b>Corrigé indicatif.</b><br>${q.ex}</div>`;
+  else {const ok=corrOk(q.id);
+   corr=`<div class="fb ${ok?'ok':'ko'}">${ok?"<b>Correct.</b> ":"<b>Ce n'est pas la réponse attendue.</b> "}${q.ex}</div>`;}
+ }
+ const cls=CORR?(q.type==="text"?"rep":(corrOk(q.id)?"good":"bad")):(okRempli(q.id)?"rep":"");
+ return `<div class="q ${cls}"><div class="qh"><span class="qn">${q.id}</span><span class="qt">${q.t}</span></div>
+  ${CORR?"":chips(q.docs)}${body}
+  <div class="saved ${okRempli(q.id)&&!CORR?'on':''}">Réponse enregistrée</div>
+  ${(!CORR&&q.hint)?`<div class="acts"><button class="btn sm ghost" onclick="alert('Indice : '+${JSON.stringify(q.hint||"")})">Indice</button></div>`:""}
+  ${corr}</div>`;
+}
+function carteLex(q){
+ const v=ANS[q.id]||"";
+ const n=v.trim().length;
+ let corr="";
+ if(CORR){
+  const txt=deacc(v);
+  const hits=q.kw.filter(g=>g.some(k=>txt.includes(deacc(k)))).length;
+  const pct=Math.round(100*hits/q.kw.length);
+  const col=pct>=75?"#5fb894":(pct>=40?"#e0b05a":"#c98a8a");
+  const s=SELF[q.id];
+  corr=`<div class="kwbar"><i style="width:${pct}%;background:${col}"></i></div>
+   <div class="fb info"><b>${hits} élément${hits>1?"s":""} sur ${q.kw.length} repéré${hits>1?"s":""} dans votre réponse.</b>
+   <div style="margin-top:7px;padding-top:7px;border-top:1px solid rgba(0,0,0,.12)">
+   <b>Définition de référence.</b><br>${q.ref}</div>
+   <div class="selfrow">`+
+   (s===undefined
+    ? `<button class="btn sm" onclick="mark('${q.id}',2)">Je savais</button>
+       <button class="btn sm ghost" onclick="mark('${q.id}',1)">Partiellement</button>
+       <button class="btn sm ghost" onclick="mark('${q.id}',0)">À revoir</button>`
+    : `<span style="font-weight:700">${s===2?"Noté comme acquis.":s===1?"Noté comme partiellement acquis.":"Noté à revoir."}</span>
+       <button class="btn sm ghost" onclick="mark('${q.id}',undefined)">Modifier</button>`)+
+   `</div></div>`;
+ }
+ const cls=CORR?(SELF[q.id]===2?"good":SELF[q.id]===0?"bad":"rep"):(okRempli(q.id)?"rep":"");
+ return `<div class="q ${cls}"><div class="qh"><span class="qn">${q.id}</span><span class="qt">${q.t}</span></div>
+  <textarea rows="4" ${CORR?"disabled":""} oninput="setA('${q.id}',this.value)"
+   placeholder="Rédigez votre réponse…">${v}</textarea>
+  <div class="lede" style="font-size:.78rem;margin-top:5px">${n} caractère${n>1?"s":""} — ${MINLEX} minimum.</div>
+  ${corr}</div>`;
+}
+function mark(id,v){if(v===undefined)delete SELF[id];else SELF[id]=v;render();}
+
+/* ---------- rendu ---------- */
+function render(){
+ const w=document.getElementById('work');
+ let h="";
+ if(CUR==="s-intro")h=vueIntro();
+ else if(CUR==="s-bilan")h=vueBilan();
+ else if(CUR==="s-conn"){
+  h=`<h2>Connaissances — le lexique du chapitre</h2><span class="budget">35 minutes</span>
+   <p class="lede">Trente questions ouvertes. Rédigez vos réponses : rien ne s'affiche avant la fin du dossier. La correction donnera la définition de référence et repérera les termes attendus dans ce que vous avez écrit.</p>`;
+  let cur="";const B={A:"Bloc A — Marché, études et veille",B:"Bloc B — La création de valeur",C:"Bloc C — Innovation et modèle économique"};
+  LEX.forEach(q=>{if(q.b!==cur){cur=q.b;h+=`<h3>${B[cur]}</h3>`;}h+=carteLex(q);});
+ }
+ else if(CUR==="s-m1")h=`<h2>Mission 1 — Que veulent réellement les clients ?</h2><span class="budget">20 minutes</span>
+  <p class="lede">Annexes 2, 3 et 4 · démarche marketing, approches, étude de marché, veille</p>`+Q.m1.map(carte).join("");
+ else if(CUR==="s-m2")h=`<h2>Mission 2 — L'activité crée-t-elle de la valeur, et pour qui ?</h2><span class="budget">25 minutes</span>
+  <p class="lede">Annexes 1, 5 et 6 · valeur ajoutée, partage, indicateurs, valeur non marchande</p>`+Q.m2.map(carte).join("");
+ else if(CUR==="s-m3")h=`<h2>Mission 3 — Faut-il lancer Le Panier du Thérain ?</h2><span class="budget">20 minutes</span>
+  <p class="lede">Annexe 7 · innovation, modèle économique, seuil</p>`+Q.m3.map(carte).join("");
+ else if(CUR==="s-syn")h=`<h2>Question de synthèse</h2><span class="budget">20 minutes</span>`+Q.syn.map(carte).join("");
+ w.innerHTML=h;majNav();majFoot();
+}
+function vueIntro(){return `
+<h2>Le contexte</h2>
+<div class="card">
+<p>Les Serres du Thérain sont une SARL horticole installée à Milly-sur-Thérain, dans l'Oise. Quatorze salariés, quatre clientèles : particuliers, collectivités, paysagistes, et depuis 2021 la vente en ligne.</p>
+<p>Sa gérante, Claire Vasseur, envisage de lancer <b>Le Panier du Thérain</b>, un abonnement mensuel comprenant une plante de saison et un conseil personnalisé. Avant de décider, elle doit répondre à trois questions — ce sont vos trois missions.</p>
+<p style="margin-bottom:0">Les sept annexes restent affichées à gauche pendant tout le travail. Sur tablette en mode portrait, le bouton <b>Annexes</b> en bas les ouvre en plein écran.</p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Règle du jeu</h3>
+<p>Vos réponses sont <b>enregistrées au fur et à mesure</b>, sans aucun retour. La correction ne s'affiche qu'une fois <b>toutes</b> les réponses saisies, par le bouton « Terminer et corriger ». Elle est alors définitive : les réponses sont verrouillées.</p>
+<div class="warn"><b>Règle de rédaction.</b> Chaque réponse chiffrée comporte le calcul, le résultat avec son unité, et une phrase d'interprétation. Un résultat sans interprétation ne vaut que la moitié des points.</div>
+<div class="wrap"><table>
+<tr><th>Étape</th><th>Contenu</th><th>Durée</th></tr>
+<tr><td>Connaissances</td><td>30 questions ouvertes sur le lexique du chapitre</td><td class="n">35 min</td></tr>
+<tr><td>Mission 1</td><td>Marché, études, veille, approches marketing</td><td class="n">20 min</td></tr>
+<tr><td>Mission 2</td><td>Valeur ajoutée, partage, indicateurs</td><td class="n">25 min</td></tr>
+<tr><td>Mission 3</td><td>Innovation, modèle économique, seuil</td><td class="n">20 min</td></tr>
+<tr><td>Synthèse</td><td>Note argumentée au format de l'épreuve</td><td class="n">20 min</td></tr>
+<tr><td><b>Total</b></td><td></td><td class="n"><b>2 h 00</b></td></tr>
+</table></div>
+<div class="acts"><button class="btn" onclick="clockStart();go('s-conn')">Démarrer le chronomètre et commencer</button></div>
+</div>`;}
+function scoreOf(k){const q=Q[k].filter(x=>x.type!=="text");
+ return q.filter(x=>corrOk(x.id)).length+"/"+q.length;}
+function lexScore(){const d=LEX.filter(q=>SELF[q.id]!==undefined);
+ return d.length?d.filter(q=>SELF[q.id]===2).length+"/"+d.length:"—";}
+function vueBilan(){
+ if(!CORR) return `<h2>Bilan</h2><div class="card"><p>Le bilan s'affiche une fois le dossier terminé et corrigé.</p>
+  <p class="lede">Il reste <b>${ITEMS().length-nbRempli()}</b> réponse(s) à saisir. Le bouton « Terminer et corriger », en bas de l'écran, s'active dès que tout est rempli.</p></div>`;
+ const auto=AUTO(), bons=auto.filter(corrOk).length;
+ let h=`<h2>Bilan</h2><div class="card"><div class="score">
+  <div class="sc"><b>${lexScore()}</b><small>Lexique</small></div>
+  <div class="sc"><b>${scoreOf('m1')}</b><small>Mission 1</small></div>
+  <div class="sc"><b>${scoreOf('m2')}</b><small>Mission 2</small></div>
+  <div class="sc"><b>${scoreOf('m3')}</b><small>Mission 3</small></div>
+  <div class="sc"><b>${bons}/${auto.length}</b><small>Total corrigé</small></div></div>`;
+ const rates=auto.filter(id=>!corrOk(id));
+ h += rates.length
+  ? `<div class="note"><b>Questions à revoir :</b><ul style="margin:6px 0 0">`+
+    rates.map(id=>`<li><b>${id}</b> — ${findQ(id).t.replace(/<[^>]+>/g,"").slice(0,90)}…</li>`).join("")+`</ul></div>`
+  : `<div class="note"><b>Aucune erreur sur les questions corrigées automatiquement.</b> Comparez maintenant votre note de synthèse au corrigé indicatif : c'est elle qui ressemble le plus à l'épreuve.</div>`;
+ const lexBad=LEX.filter(q=>SELF[q.id]===0||SELF[q.id]===1);
+ if(lexBad.length) h+=`<div class="note" style="border-left-color:#e0b05a"><b>Notions du lexique à reprendre :</b><ul style="margin:6px 0 0">`+
+  lexBad.map(q=>`<li>${q.id} — ${q.t.replace(/<[^>]+>/g,"").slice(0,80)}</li>`).join("")+`</ul></div>`;
+ h+=`<p class="lede">Temps restant sur les deux heures : <b>${fmt(Math.max(0,left))}</b>.</p>
+  <div class="acts"><button class="btn" onclick="exporter()">Télécharger mon travail</button>
+  <button class="btn ghost" onclick="window.print()">Imprimer</button></div></div>`;
+ return h;
+}
+
+/* ---------- pied de page ---------- */
+function majFoot(){
+ const n=nbRempli(),T=ITEMS().length;
+ document.getElementById('pbar').style.width=(100*n/T)+"%";
+ document.getElementById('foot').innerHTML=CORR
+  ? `Dossier corrigé — <b>${AUTO().filter(corrOk).length} / ${AUTO().length}</b> sur les questions à correction automatique`
+  : `<b>${n} / ${T}</b> réponses enregistrées${n<T?` — il en reste ${T-n}`:` — vous pouvez corriger`}`;
+ const b=document.getElementById('endbtn');
+ b.disabled=CORR||n<T;b.textContent=CORR?"Corrigé affiché":"Terminer et corriger";
+}
+function reveal(force){
+ if(!force&&nbRempli()<ITEMS().length)return;
+ if(!force&&!confirm("Afficher la correction ? Vos réponses seront verrouillées et vous ne pourrez plus les modifier."))return;
+ CORR=true;clearInterval(tick);running=false;go('s-bilan');
+}
+function teacher(){
+ const c=prompt("Code enseignant :");
+ if(c===null)return;
+ if(c.trim().toUpperCase()==="GREMPRIME"){CORR=true;render();alert("Correction déverrouillée.");}
+ else alert("Code incorrect.");
+}
+function exporter(){
+ let L=["CHAPITRE 1 — MON TRAVAIL","Les Serres du Therain — Terminale STMG MSGN",
+  "Genere le "+new Date().toLocaleString('fr-FR'),"Temps restant : "+fmt(Math.max(0,left)),"",
+  "Lexique (auto-evaluation) : "+lexScore(),
+  "Missions (correction automatique) : "+AUTO().filter(corrOk).length+" / "+AUTO().length,
+  "".padEnd(64,"-"),"","CONNAISSANCES",""];
+ LEX.forEach(q=>{L.push(q.id+" — "+q.t.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim());
+  L.push("   "+((ANS[q.id]||"(vide)").replace(/\n/g,"\n   ")));
+  L.push("   auto-evaluation : "+(SELF[q.id]===2?"je savais":SELF[q.id]===1?"partiellement":SELF[q.id]===0?"a revoir":"non positionne"));
+  L.push("");});
+ L.push("".padEnd(64,"-"),"","MISSIONS","");
+ ALLQ().forEach(q=>{const v=ANS[q.id];
+  L.push(q.id+" — "+q.t.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim());
+  if(v===undefined)L.push("   (vide)");
+  else if(q.type==="text")L.push("   "+String(v).replace(/\n/g,"\n   "));
+  else if(q.type==="num")L.push("   reponse : "+v+"   attendu : "+q.ans+" "+(q.unit||"")+"   -> "+(corrOk(q.id)?"correct":"a revoir"));
+  else if(q.type==="assoc")L.push("   reponse : "+v.join(" | ")+"   -> "+(corrOk(q.id)?"correct":"a revoir"));
+  else L.push("   reponse : "+v.map(i=>String.fromCharCode(97+i)).join(", ")+"   -> "+(corrOk(q.id)?"correct":"a revoir"));
+  L.push("");});
+ const b=new Blob([L.join("\n")],{type:"text/plain;charset=utf-8"});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);
+ a.download="Chapitre1_mon_travail.txt";a.click();URL.revokeObjectURL(a.href);
+}
+
+/* ---------- chronomètre ---------- */
+let left=7200,tick=null,running=false;
+function fmt(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;
+ return h+":"+String(m).padStart(2,'0')+":"+String(x).padStart(2,'0');}
+function clockStart(){if(running)return;running=true;
+ tick=setInterval(()=>{left--;const c=document.getElementById('clock');
+  c.textContent=fmt(Math.max(0,left));if(left<=600)c.className="hot";
+  if(left<=0){clearInterval(tick);running=false;c.textContent="0:00:00";}},1000);}
+function clockToggle(){if(running){clearInterval(tick);running=false;
+ document.getElementById('clock').textContent=fmt(left)+" \u23f8";}
+ else{document.getElementById('clock').textContent=fmt(left);clockStart();}}
+
+buildNav(); buildAnnexes(); render();
+</script>
+</body>
+</html>

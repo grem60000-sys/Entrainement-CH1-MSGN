@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14503f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Module A1 — Atelier chiffré · Cycl'Oise</title>
+<style>
+:root{--nav:#14503f;--nav2:#1c6a53;--navdark:#0b3529;--navlite:#bcdcd0;--line:#c2ded3;--bg:#f2f8f5;
+--card:#fff;--accbg:#e7f4ef;--zebra:#f6fbf9;--txt:#1a1a1a;--muted:#586b63}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+ background:var(--bg);color:var(--txt);font-size:16px;line-height:1.5;display:flex;flex-direction:column;overflow:hidden}
+header{flex:0 0 auto;background:var(--nav);color:#fff;padding:8px 14px;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:20}
+.htop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:.97rem;margin:0;font-weight:700}
+.hsub{font-size:.73rem;color:var(--navlite);margin-top:1px}
+#clock{font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.14);
+ padding:4px 10px;border-radius:9px;cursor:pointer;white-space:nowrap;color:#fff}
+#clock.hot{background:#8a2f2f}
+.bar{height:5px;background:var(--navdark);border-radius:99px;margin-top:7px;overflow:hidden}
+.bar i{display:block;height:100%;background:#7ed0ae;width:0;transition:width .3s}
+nav{flex:0 0 auto;display:flex;gap:5px;overflow-x:auto;padding:7px 10px;background:var(--nav2);scrollbar-width:none;z-index:19}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;min-height:38px;padding:7px 12px;border:0;border-radius:20px;
+ background:rgba(255,255,255,.14);color:#eaf5f0;font-size:.8rem;font-weight:600;cursor:pointer}
+nav button.on{background:#fff;color:var(--nav)}
+nav button.fait{background:#7ed0ae;color:var(--navdark)}
+.app{flex:1 1 auto;display:grid;grid-template-columns:minmax(300px,40%) 1fr;min-height:0}
+#annexes{overflow-y:auto;background:#fff;border-right:1px solid var(--line);padding:12px 13px 40px;-webkit-overflow-scrolling:touch}
+#work{overflow-y:auto;padding:16px 16px 40px;-webkit-overflow-scrolling:touch}
+#annexes h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:0 0 10px}
+.acc{border:1px solid var(--line);border-radius:9px;margin-bottom:8px;overflow:hidden}
+.acc>button{width:100%;text-align:left;background:var(--accbg);border:0;padding:10px 12px;font:inherit;
+ font-size:.85rem;font-weight:700;color:var(--nav);cursor:pointer;display:flex;justify-content:space-between;gap:8px;min-height:42px;align-items:center}
+.acc>div{display:none;padding:10px 12px;border-top:1px solid var(--line)}
+.acc.open>div{display:block}
+.acc>button i{font-style:normal;color:var(--muted);font-weight:400}
+section{display:none}section.on{display:block}
+h2{font-size:1.1rem;color:var(--nav);margin:2px 0 4px}
+h3{font-size:.95rem;color:var(--nav);margin:18px 0 6px}
+p{margin:0 0 9px}
+.lede{color:var(--muted);font-size:.87rem}
+.budget{display:inline-block;background:var(--accbg);border:1px solid var(--line);color:var(--nav);
+ border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:700;margin-bottom:11px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;margin:0 0 13px}
+table{border-collapse:collapse;width:100%;font-size:.8rem;margin:7px 0}
+th{background:var(--nav);color:#fff;text-align:left;padding:6px 7px;font-weight:600}
+td{border:1px solid var(--line);padding:5px 7px;vertical-align:middle}
+tr:nth-child(even) td{background:var(--zebra)}
+td.n{text-align:right;white-space:nowrap}
+.wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+blockquote{margin:0 0 7px;padding:5px 0 5px 11px;border-left:3px solid var(--line);font-style:italic;color:#333;font-size:.86rem}
+.q{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);
+ border-radius:10px;padding:12px 13px;margin:0 0 11px}
+.q.rep{border-left-color:var(--nav)}
+.q.good{border-left-color:#5fb894}
+.q.bad{border-left-color:#c98a8a}
+.qh{display:flex;gap:8px;align-items:baseline;margin-bottom:8px}
+.qn{font-weight:800;color:var(--nav);font-size:.84rem;flex:0 0 auto}
+.qt{font-size:.91rem}
+.numrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input[type=text],textarea{font:inherit;font-size:.97rem;padding:10px 11px;border:1.5px solid var(--line);
+ border-radius:9px;background:#fff;width:100%;max-width:220px}
+textarea{max-width:100%;min-height:92px;line-height:1.45;resize:vertical}
+input.cell{max-width:125px;padding:7px 8px;font-size:.87rem}
+input:focus,textarea:focus{outline:none;border-color:var(--nav)}
+input:disabled,textarea:disabled{background:#f4f6f8;color:#333}
+select{font:inherit;font-size:.9rem;padding:9px;border:1.5px solid var(--line);border-radius:9px;background:#fff;width:100%}
+.unit{color:var(--muted);font-size:.85rem}
+.saved{font-size:.76rem;color:var(--nav);font-weight:700;margin-top:7px;display:none}
+.saved.on{display:block}
+.btn{min-height:42px;padding:9px 16px;border:0;border-radius:9px;background:var(--nav);color:#fff;font-size:.87rem;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c5cd;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--nav);border:1.5px solid var(--nav)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:.79rem}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.opts{display:flex;flex-direction:column;gap:7px;margin-top:3px}
+.opt{display:flex;gap:9px;align-items:flex-start;min-height:42px;padding:9px 10px;border:1.5px solid var(--line);
+ border-radius:9px;background:#fff;cursor:pointer;font-size:.88rem}
+.opt.sel{border-color:var(--nav);background:var(--accbg)}
+.opt.good{border-color:#a9d5c6;background:#e7f4ef}
+.opt.bad{border-color:#e2b3b3;background:#fbeeee}
+.opt span.mk{flex:0 0 auto;font-weight:800;color:var(--nav)}
+.fb{margin-top:9px;padding:9px 11px;border-radius:9px;font-size:.85rem}
+.fb.ok{background:#e7f4ef;border:1px solid #a9d5c6;color:#14503f}
+.fb.ko{background:#fbeeee;border:1px solid #e2b3b3;color:#8a2f2f}
+.fb.info{background:#fdf7ec;border:1px solid #e0c08a;color:#5c3f0c}
+.note{background:var(--accbg);border-left:4px solid var(--nav);border-radius:0 8px 8px 0;padding:9px 12px;margin:11px 0;font-size:.85rem}
+.warn{background:#fdf7ec;border:1px solid #e0c08a;border-radius:9px;padding:9px 12px;margin:11px 0;font-size:.85rem;color:#5c3f0c}
+.score{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.sc{flex:1 1 100px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.sc b{display:block;font-size:1.3rem;color:var(--nav);line-height:1.2}
+.sc small{color:var(--muted);font-size:.71rem}
+.kwbar{height:5px;background:#e4ecf2;border-radius:99px;margin-top:7px;overflow:hidden}
+.kwbar i{display:block;height:100%;width:0}
+.selfrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+footer{flex:0 0 auto;background:#fff;border-top:1px solid var(--line);
+ padding:8px 13px calc(8px + env(safe-area-inset-bottom,0px));display:flex;gap:9px;
+ justify-content:space-between;align-items:center;z-index:21;flex-wrap:wrap}
+footer .l{font-size:.79rem;color:var(--muted)}
+footer .l b{color:var(--nav)}
+#annexbtn{display:none}
+@media(max-width:1000px){
+ .app{grid-template-columns:1fr}
+ #annexes{position:fixed;inset:0;z-index:70;display:none;padding-top:14px;border:0}
+ #annexes.show{display:block}
+ #annexbtn{display:inline-block}
+ #annexclose{display:block}
+}
+@media(min-width:1001px){#annexclose{display:none}}
+@media print{nav,footer,#clock,.acts{display:none}body{overflow:visible;height:auto}
+ .app{display:block}section{display:block!important}#annexes{display:block;border:0}}
+
+@media(max-width:600px){
+ h1{font-size:.86rem}
+ .hsub{font-size:.68rem}
+ #clock{font-size:.98rem;padding:3px 8px}
+ nav button{padding:6px 10px;font-size:.76rem;min-height:36px}
+ #work{padding:12px 11px 30px}
+ #annexes{padding:12px 11px 30px}
+ .q{padding:11px 11px}
+ .qt{font-size:.89rem}
+ table{font-size:.76rem}
+ th,td{padding:5px 6px}
+ input[type=text],textarea,select{font-size:16px;max-width:100%}
+ input.cell{max-width:100%}
+ .opt{font-size:.86rem;padding:10px 9px}
+ footer{flex-direction:column;align-items:stretch;gap:7px}
+ footer .l{text-align:center}
+ footer>span:last-child{display:flex;gap:7px}
+ footer>span:last-child .btn{flex:1 1 auto}
+ .sc{flex:1 1 44%}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htop">
+    <div><h1>Module A1 — Atelier chiffré</h1>
+      <div class="hsub">Terminale STMG · cas Cycl'Oise · 2 heures</div></div>
+    <div id="clock" onclick="clockToggle()">2:00:00</div>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+</header>
+
+<nav id="nav"></nav>
+
+<div class="app">
+  <aside id="annexes">
+    <button class="btn sm ghost" id="annexclose" style="float:right" onclick="toggleAnnexes()">Fermer</button>
+    <h2>Annexes — dossier Cycl'Oise</h2>
+    <div id="annexlist"></div>
+  </aside>
+  <div id="work"></div>
+</div>
+
+<footer>
+  <span class="l" id="foot">—</span>
+  <span style="display:flex;gap:8px;flex-wrap:wrap">
+    <a class="btn sm ghost" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">Accueil</a>
+    <button class="btn sm ghost" id="annexbtn" onclick="toggleAnnexes()">Annexes</button>
+    <button class="btn sm ghost" onclick="teacher()">Accès enseignant</button>
+    <button class="btn" id="endbtn" onclick="reveal()" disabled>Terminer et corriger</button>
+  </span>
+</footer>
+
+<script>
+const DOCS={
+1:{t:"Cycl'Oise — présentation",h:`
+<p>SARL créée en 2016 à Beauvais. Quatre activités : vente de vélos neufs, revente de vélos d'occasion reconditionnés, réparation et entretien, location longue durée par abonnement (depuis 2021).</p>
+<div class="wrap"><table>
+<tr><th>Élément</th><th>2023</th><th>2026</th></tr>
+<tr><td>Chiffre d'affaires</td><td class="n">742 000 €</td><td class="n">968 000 €</td></tr>
+<tr><td>Effectif (dont mécaniciens)</td><td class="n">5 (2)</td><td class="n">6 (2)</td></tr>
+<tr><td>Jours d'ouverture dans l'année</td><td class="n">296</td><td class="n">296</td></tr>
+<tr><td>Abonnés à la location au 31/12</td><td class="n">95</td><td class="n">228</td></tr>
+</table></div>`},
+2:{t:"Répartition du chiffre d'affaires par activité",h:`
+<div class="wrap"><table>
+<tr><th>Activité</th><th>CA 2023</th><th>Part</th><th>CA 2026</th><th>Part</th></tr>
+<tr><td>Vélos neufs</td><td class="n">460 040 €</td><td class="n">62,0 %</td><td class="n">522 496 €</td><td class="n">54,0 %</td></tr>
+<tr><td>Occasion reconditionnée</td><td class="n">81 620 €</td><td class="n">11,0 %</td><td class="n">145 200 €</td><td class="n">15,0 %</td></tr>
+<tr><td>Atelier réparation</td><td class="n">155 820 €</td><td class="n">21,0 %</td><td class="n">193 600 €</td><td class="n">20,0 %</td></tr>
+<tr><td>Location par abonnement</td><td class="n">44 520 €</td><td class="n">6,0 %</td><td class="n">106 704 €</td><td class="n">11,0 %</td></tr>
+<tr><td><b>Total</b></td><td class="n"><b>742 000 €</b></td><td class="n">100 %</td><td class="n"><b>968 000 €</b></td><td class="n">100 %</td></tr>
+</table></div>`},
+3:{t:"Compte de résultat simplifié et bilan — 2026",h:`
+<div class="wrap"><table>
+<tr><th>Compte de résultat simplifié</th><th>Montant (€)</th></tr>
+<tr><td>Chiffre d'affaires</td><td class="n">968 000</td></tr>
+<tr><td>Achats de marchandises et de matières consommés</td><td class="n">486 000</td></tr>
+<tr><td>Autres achats et charges externes</td><td class="n">132 000</td></tr>
+<tr><td>Charges de personnel</td><td class="n">214 000</td></tr>
+<tr><td>Impôts et taxes</td><td class="n">12 000</td></tr>
+<tr><td>Dotations aux amortissements</td><td class="n">38 000</td></tr>
+<tr><td>Charges d'intérêts</td><td class="n">11 000</td></tr>
+<tr><td>Impôt sur les bénéfices</td><td class="n">18 000</td></tr>
+</table></div>
+<div class="wrap"><table>
+<tr><th>Bilan au 31 décembre 2026</th><th>Montant (€)</th></tr>
+<tr><td>Total de l'actif</td><td class="n">615 000</td></tr>
+<tr><td>Capitaux propres</td><td class="n">268 000</td></tr>
+<tr><td>Dettes</td><td class="n">347 000</td></tr>
+</table></div>
+<p class="lede">Taux de valeur ajoutée moyen du commerce de cycles : 34 %. Aucun dividende distribué en 2026.</p>`},
+4:{t:"Tarifs et coûts",h:`
+<div class="wrap"><table>
+<tr><th>Article ou prestation</th><th>Prix TTC</th><th>Coût d'achat HT</th></tr>
+<tr><td>Vélo de ville, modèle courant</td><td class="n">549,00 €</td><td class="n">312,00 €</td></tr>
+<tr><td>Vélo à assistance électrique</td><td class="n">1 890,00 €</td><td class="n">1 148,00 €</td></tr>
+<tr><td>Forfait révision annuelle</td><td class="n">68,00 €</td><td class="n">—</td></tr>
+<tr><td>Lot de 7 chambres à air</td><td class="n">38,50 €</td><td class="n">—</td></tr>
+<tr><td>Lubrifiant, flacon 125 mL</td><td class="n">9,50 €</td><td class="n">—</td></tr>
+<tr><td>Lubrifiant, bidon 400 mL</td><td class="n">27,20 €</td><td class="n">—</td></tr>
+</table></div>
+<p class="lede">TVA applicable : 20 %. Les prix affichés en magasin sont TTC.</p>`},
+5:{t:"Le projet d'abonnement — données de gestion",h:`
+<p>L'abonnement de location longue durée est facturé <b>39,00 € TTC par mois</b>, sans engagement de durée. Il comprend le vélo, l'entretien courant et le remplacement des pièces d'usure.</p>
+<div class="wrap"><table>
+<tr><th>Élément</th><th>Montant</th></tr>
+<tr><td>Coût variable mensuel par abonné (entretien, pièces, amortissement du vélo)</td><td class="n">16,00 €</td></tr>
+<tr><td>Charges fixes annuelles du service (local de stockage, logiciel, temps administratif)</td><td class="n">41 400 €</td></tr>
+<tr><td>Nombre d'abonnés au 31 décembre 2026</td><td class="n">228</td></tr>
+</table></div>
+<p><b>Hypothèse étudiée par le gérant :</b> baisser le prix à 33,00 € par mois pour accélérer le recrutement d'abonnés.</p>`},
+6:{t:"Évolution du chiffre d'affaires de la location",h:`
+<div class="wrap"><table>
+<tr><th>Année</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th></tr>
+<tr><td>CA location</td><td class="n">21 060 €</td><td class="n">44 520 €</td><td class="n">66 300 €</td><td class="n">87 048 €</td><td class="n">106 704 €</td></tr>
+</table></div>`}};
+const NOT={
+n1:{t:"N1 — Proportions et parts",min:10,lede:"Calculer une part, retrouver un total, enchaîner deux taux sur des sous-populations.",
+ q:[
+ {id:"1.1",docs:[2],t:"Quelle part l'atelier réparation représente-t-il dans le chiffre d'affaires 2026 ? (en %, une décimale)",ans:20.0,tol:0.15,u:"%",ex:"193 600 ÷ 968 000 = <b>20,0 %</b>."},
+ {id:"1.2",docs:[2],t:"Quelle part représentent ensemble les vélos neufs et l'occasion reconditionnée en 2026 ? (en %, une décimale)",ans:69.0,tol:0.2,u:"%",ex:"(522 496 + 145 200) ÷ 968 000 = 667 696 ÷ 968 000 = <b>69,0 %</b>. Deux parts d'un même total s'additionnent : 54,0 + 15,0 = 69,0 %."},
+ {id:"1.3",docs:[2],t:"L'atelier rapporte 193 600 € et représente 20,0 % du total. Retrouvez le chiffre d'affaires total, en euros.",ans:968000,tol:500,u:"€",ex:"193 600 ÷ 0,20 = <b>968 000 €</b>. Pour retrouver un total à partir d'une part, on <b>divise</b>."},
+ {id:"1.4",docs:[1],t:"Sur les 228 abonnés, 57 bénéficient du tarif étudiant. Quelle part cela représente-t-il ? (en %, une décimale)",ans:25.0,tol:0.15,u:"%",ex:"57 ÷ 228 = <b>25,0 %</b>."},
+ {id:"1.5",docs:[],t:"15 % des clients achètent un vélo à assistance électrique. Parmi eux, 60 % souscrivent l'assurance vol. Quelle part de l'ensemble des clients est concernée ? (en %, une décimale)",ans:9.0,tol:0.15,u:"%",ex:"0,15 × 0,60 = <b>9,0 %</b>. Un pourcentage d'un pourcentage se <b>multiplie</b>. Répondre 75 % (addition) ou 60 % est l'erreur classique.",hint:"Le second taux porte sur les 15 %, pas sur l'ensemble."}]},
+
+n2:{t:"N2 — Appliquer et enchaîner des taux",min:12,lede:"Remises, hausses, taux successifs, retour au prix initial.",
+ q:[
+ {id:"2.1",docs:[4],t:"Le vélo de ville à 549,00 € TTC est soldé à − 15 %. Quel est son prix, en euros ? Une seule opération.",ans:466.65,tol:0.05,u:"€",ex:"549,00 × 0,85 = <b>466,65 €</b>. Multiplier par 0,85 plutôt que calculer puis soustraire : une seule opération, une seule occasion de se tromper."},
+ {id:"2.2",docs:[4],t:"Le vélo électrique à 1 890,00 € reçoit une remise de 20 %, puis une seconde de 10 % sur le prix déjà remisé. Quel est le prix final, en euros ?",ans:1360.80,tol:0.05,u:"€",ex:"1 890 × 0,80 × 0,90 = <b>1 360,80 €</b>."},
+ {id:"2.3",docs:[4],t:"Quel est le taux de remise global obtenu sur ce vélo électrique ? (en %, une décimale, sans signe)",ans:28.0,tol:0.15,u:"%",ex:"0,80 × 0,90 = 0,72 → remise globale de <b>28,0 %</b>, et non 30 %. La seconde remise porte sur un prix déjà réduit : on multiplie les coefficients, on n'additionne pas les taux."},
+ {id:"2.4",docs:[],t:"Le prix d'un accessoire a augmenté de 12 %. De quel pourcentage doit-il baisser pour revenir exactement à son niveau initial ? (une décimale)",ans:10.7,tol:0.2,u:"%",ex:"1 ÷ 1,12 = 0,8929 → baisse de <b>10,7 %</b>. Une hausse et la baisse qui l'annule n'ont jamais le même taux."},
+ {id:"2.5",docs:[3],t:"Le gérant envisage d'augmenter les salaires de 2,5 %. Quelles seraient les nouvelles charges de personnel, en euros ?",ans:219350,tol:50,u:"€",ex:"214 000 × 1,025 = <b>219 350 €</b>, soit 5 350 € de plus — près d'un dixième du résultat net."}]},
+
+n3:{t:"N3 — Variation, coefficient, indice",min:15,lede:"Les trois façons d'exprimer la même évolution, et leur usage.",
+ q:[
+ {id:"3.1",docs:[1],t:"De combien le chiffre d'affaires total a-t-il varié entre 2023 et 2026 ? Donnez la variation absolue, en euros.",ans:226000,tol:100,u:"€",ex:"968 000 − 742 000 = <b>+ 226 000 €</b>."},
+ {id:"3.2",docs:[1],t:"Quel est le taux de variation correspondant ? (en %, une décimale)",ans:30.5,tol:0.2,u:"%",ex:"226 000 ÷ 742 000 = <b>+ 30,5 %</b>. On divise toujours par la valeur de <b>départ</b> : diviser par 968 000 donnerait 23,3 %, ce qui est faux.",hint:"Par rapport à quoi ? Toujours par rapport à la situation initiale."},
+ {id:"3.3",docs:[1],t:"Quel est le coefficient multiplicateur ? (quatre décimales)",ans:1.3046,tol:0.002,u:"",ex:"968 000 ÷ 742 000 = <b>1,3046</b>. C'est le coefficient qu'on utilisera pour projeter ou pour remonter dans le temps."},
+ {id:"3.4",docs:[1],t:"Quel est l'indice du chiffre d'affaires 2026, base 100 en 2023 ? (une décimale)",ans:130.5,tol:0.2,u:"",ex:"(968 000 ÷ 742 000) × 100 = <b>130,5</b>. Un indice de 130,5 se lit directement : + 30,5 % par rapport à la base."},
+ {id:"3.5",docs:[2],t:"Quel est le taux de variation du chiffre d'affaires de l'occasion reconditionnée entre 2023 et 2026 ? (en %, une décimale)",ans:77.9,tol:0.3,u:"%",ex:"(145 200 − 81 620) ÷ 81 620 = <b>+ 77,9 %</b>. C'est la deuxième plus forte progression, derrière la location (+ 139,7 %)."},
+ {id:"3.6",docs:[6],t:"Quel est l'indice du chiffre d'affaires de la location en 2026, base 100 en 2023 ? (une décimale)",ans:239.7,tol:0.4,u:"",ex:"(106 704 ÷ 44 520) × 100 = <b>239,7</b>. Le chiffre d'affaires a été multiplié par près de 2,4 en trois ans."}]},
+
+n4:{t:"N4 — Taux annuel moyen et projection",min:12,lede:"Le taux constant qui produirait le même résultat, et ce qu'il permet d'anticiper.",
+ q:[
+ {id:"4.1",docs:[1],t:"Quel est le taux de croissance annuel moyen du chiffre d'affaires total entre 2023 et 2026 ? (en %, deux décimales)",ans:9.27,tol:0.15,u:"%",ex:"Trois intervalles : (1,3046)<sup>1/3</sup> − 1 = <b>9,27 % par an</b>. Attention : de 2023 à 2026, il y a quatre millésimes mais <b>trois</b> intervalles.",hint:"Comptez les intervalles, pas les années citées."},
+ {id:"4.2",docs:[1],t:"En prolongeant ce taux, quel chiffre d'affaires atteindrait-on en 2029 ? (en euros, arrondi à l'unité)",ans:1262836,tol:3000,u:"€",ex:"968 000 × 1,0927<sup>3</sup> ≈ <b>1 262 836 €</b>. L'entreprise franchirait le million dès 2028."},
+ {id:"4.3",docs:[6],t:"Quel est le taux de croissance annuel moyen du chiffre d'affaires de la location entre 2022 et 2026 ? (en %, deux décimales)",ans:50.03,tol:0.3,u:"%",ex:"Quatre intervalles : (106 704 ÷ 21 060)<sup>1/4</sup> − 1 = <b>50,03 % par an</b>. Un rythme qui ne peut pas se maintenir indéfiniment : les taux annuels décroissent déjà (+ 111,4 % en 2023, + 22,6 % en 2026)."},
+ {id:"4.4",docs:[1],t:"Si le chiffre d'affaires total ne progressait plus que de 2 % par an, quel serait-il en 2029 ? (en euros, arrondi à l'unité)",ans:1027249,tol:2000,u:"€",ex:"968 000 × 1,02<sup>3</sup> ≈ <b>1 027 249 €</b>, soit 235 587 € de moins que dans l'hypothèse précédente. L'écart entre deux hypothèses de taux se creuse très vite : c'est tout l'intérêt de calculer un taux moyen plutôt que de raisonner à vue."}]},
+
+n5:{t:"N5 — Points et pourcentage",min:8,lede:"Deux façons de comparer deux pourcentages. Ne jamais les confondre.",
+ q:[
+ {id:"5.1",docs:[2],t:"La part des vélos neufs passe de 62,0 % à 54,0 %. Quel est l'écart, en points ? (avec le signe)",ans:-8,tol:0.15,u:"points",ex:"54,0 − 62,0 = <b>− 8,0 points</b>. On soustrait deux pourcentages : le résultat s'exprime en points."},
+ {id:"5.2",docs:[2],t:"Quel est le taux de variation de cette part ? (en %, une décimale, avec le signe)",ans:-12.9,tol:0.25,u:"%",ex:"(54,0 − 62,0) ÷ 62,0 = <b>− 12,9 %</b>. Les deux résultats, − 8 points et − 12,9 %, décrivent le même fait : ce sont deux unités différentes."},
+ {id:"5.3",docs:[2],t:"Le chiffre d'affaires des vélos neufs a-t-il pour autant baissé ? Donnez son taux de variation entre 2023 et 2026. (en %, une décimale)",ans:13.6,tol:0.25,u:"%",ex:"(522 496 − 460 040) ÷ 460 040 = <b>+ 13,6 %</b>. Le chiffre d'affaires <b>augmente</b>, mais moins vite que les autres activités : son poids relatif diminue. Une part qui baisse ne signifie pas une activité qui baisse.",hint:"Comparez des euros à des euros, pas une part à un montant."},
+ {id:"5.4",docs:[2],t:"La part de la location passe de 6,0 % à 11,0 %. Quel est l'écart, en points ?",ans:5,tol:0.15,u:"points",ex:"11,0 − 6,0 = <b>+ 5,0 points</b>. Exprimée en taux de variation, la même évolution vaut + 83,3 % : écrire « + 5 % » serait faux."}]},
+
+n6:{t:"N6 — Proportionnalité et échelles de temps",min:12,lede:"Retour à l'unité, comparaison de conditionnements, conversions de durée.",
+ q:[
+ {id:"6.1",docs:[4],t:"Un lot de 7 chambres à air coûte 38,50 €. Quel serait le prix de 18 chambres à air, en euros ?",ans:99.00,tol:0.05,u:"€",ex:"38,50 ÷ 7 = 5,50 € l'unité, puis 5,50 × 18 = <b>99,00 €</b>. Passer par le prix unitaire évite toute erreur de sens."},
+ {id:"6.2",docs:[4],t:"Quel est le prix au litre du bidon de lubrifiant de 400 mL ? (en €/L, deux décimales)",ans:68.00,tol:0.1,u:"€/L",ex:"27,20 ÷ 0,400 = <b>68,00 €/L</b>. Le flacon de 125 mL revient à 76,00 €/L : le bidon est plus avantageux, malgré un prix affiché trois fois supérieur."},
+ {id:"6.3",docs:[5],t:"L'abonnement coûte 39,00 € par mois. Quel est son coût pour un abonné resté trois ans, en euros ?",ans:1404,tol:1,u:"€",ex:"39 × 12 = 468 € par an, puis × 3 = <b>1 404 €</b>. À comparer au prix d'achat d'un vélo neuf : c'est l'argument commercial du service, et sa limite."},
+ {id:"6.4",docs:[1],t:"L'entreprise réalise 968 000 € sur 296 jours d'ouverture. Quel est le chiffre d'affaires moyen par jour ? (deux décimales)",ans:3270.27,tol:1,u:"€",ex:"968 000 ÷ 296 = <b>3 270,27 €</b>. C'est une <b>moyenne</b> : le commerce de cycles est très saisonnier, aucune journée réelle ne ressemble à ce chiffre. Le calcul est juste, l'interprétation serait fausse si l'on oubliait la saisonnalité."},
+ {id:"6.5",docs:[1,2],t:"L'atelier a facturé 193 600 € avec deux mécaniciens, sur 296 jours. Quel chiffre d'affaires cela représente-t-il par mécanicien et par jour ? (deux décimales)",ans:327.03,tol:1,u:"€",ex:"193 600 ÷ 296 ÷ 2 = <b>327,03 €</b>. Ramener à l'unité de travail permet de comparer l'atelier à un autre garage ou à une norme de filière."}]},
+
+n7:{t:"N7 — HT, TTC et marges",min:8,lede:"La TVA s'applique au prix hors taxes. Taux de marge et taux de marque ne se calculent pas sur la même base.",
+ q:[
+ {id:"7.1",docs:[4],t:"Le vélo de ville est affiché 549,00 € TTC, TVA 20 %. Quel est son prix hors taxes, en euros ?",ans:457.50,tol:0.05,u:"€",ex:"549,00 ÷ 1,20 = <b>457,50 €</b>."},
+ {id:"7.2",docs:[4],t:"Un élève propose de retirer 20 % du prix TTC pour retrouver le HT. Quel écart en euros cette méthode produit-elle sur ce vélo ?",ans:18.30,tol:0.1,u:"€",ex:"549 × 0,80 = 439,20 €, contre 457,50 € réels : un écart de <b>18,30 €</b>. La TVA s'applique au prix HT, pas au prix TTC : on divise, on ne soustrait pas."},
+ {id:"7.3",docs:[4],t:"Coût d'achat 312,00 € HT, prix de vente 457,50 € HT. Quelle est la marge en euros ?",ans:145.50,tol:0.05,u:"€",ex:"457,50 − 312,00 = <b>145,50 €</b>."},
+ {id:"7.4",docs:[4],t:"Quel est le taux de marge sur ce vélo ? (marge rapportée au coût d'achat, en %, une décimale)",ans:46.6,tol:0.25,u:"%",ex:"145,50 ÷ 312,00 = <b>46,6 %</b>."},
+ {id:"7.5",docs:[4],t:"Quel est le taux de marque ? (marge rapportée au prix de vente, en %, une décimale)",ans:31.8,tol:0.25,u:"%",ex:"145,50 ÷ 457,50 = <b>31,8 %</b>. Même marge, deux taux différents : la confusion entre marge et marque est l'erreur la plus fréquente de tout le programme.",hint:"Marge : on divise par le coût. Marque : on divise par le prix de vente."}]}
+};
+const N8=[
+ {t:"« Le chiffre d'affaires des vélos neufs a baissé de 8 % entre 2023 et 2026. »",ok:false,
+  ex:"<b>Faux.</b> C'est la <i>part</i> qui recule de 8 points. Le chiffre d'affaires progresse de <b>+ 13,6 %</b>. Erreur : confusion entre une part et un montant."},
+ {t:"« La location a progressé de 5 % sur la période. »",ok:false,
+  ex:"<b>Faux.</b> Sa part gagne 5 points ; son chiffre d'affaires progresse de <b>+ 139,7 %</b>. Erreur : points confondus avec pourcentage."},
+ {t:"« Le chiffre d'affaires total a progressé de 23,3 %. »",ok:false,
+  ex:"<b>Faux.</b> 226 000 ÷ 742 000 = <b>+ 30,5 %</b>. Le chiffre de 23,3 % s'obtient en divisant par la valeur d'arrivée. Erreur : mauvaise base."},
+ {t:"« En 2026, l'atelier et la location pèsent ensemble 31 % du chiffre d'affaires. »",ok:true,
+  ex:"<b>Vrai.</b> 20,0 + 11,0 = 31,0 %. Deux parts d'un même total s'additionnent sans difficulté."},
+ {t:"« L'activité qui a le plus progressé en euros est l'occasion reconditionnée. »",ok:true,
+  ex:"<b>Vrai.</b> + 63 580 €, devant les vélos neufs (+ 62 456 €) et la location (+ 62 184 €). Les trois sont très proches, ce qui n'apparaît pas du tout si l'on ne regarde que les taux de variation."}
+];
+const N9=[
+ {t:"Taux de valeur ajoutée : <b>156 %</b>",ok:"impossible",ex:"La valeur ajoutée ne peut pas dépasser le chiffre d'affaires : elle en est une différence. L'élève a divisé le CA par la VA. Correct : <b>36,2 %</b>."},
+ {t:"Part de l'atelier réparation : <b>20,0 %</b>",ok:"plausible",ex:"Plausible et exact : 193 600 ÷ 968 000 = 20,0 %."},
+ {t:"Rentabilité financière : <b>2 126,9 %</b>",ok:"impossible",ex:"Erreur de virgule ou multiplication par 100 en trop : 57 000 ÷ 268 000 = <b>21,3 %</b>."},
+ {t:"Coefficient multiplicateur d'une hausse de 30,5 % : <b>0,7665</b>",ok:"impossible",ex:"Une hausse donne un coefficient supérieur à 1 : <b>1,3046</b>. La valeur proposée est son inverse, donc un coefficient de baisse."},
+ {t:"Chiffre d'affaires moyen par jour d'ouverture : <b>3 270 270 €</b>",ok:"impossible",ex:"Erreur de virgule d'un facteur 1 000 : ce montant dépasse le chiffre d'affaires annuel. Correct : <b>3 270,27 €</b>. L'ordre de grandeur suffisait à le repérer sans refaire le calcul."},
+ {t:"Nombre d'abonnés au seuil de rentabilité : <b>150 abonnés</b>",ok:"plausible",ex:"Plausible et exact : 41 400 ÷ 276 = 150 abonnés."}
+];
+const TB=[
+ ["Consommations intermédiaires",618000,500,"€","486 000 + 132 000"],
+ ["Valeur ajoutée",350000,500,"€","968 000 − 618 000"],
+ ["Taux de valeur ajoutée",36.2,0.2,"%","350 000 ÷ 968 000"],
+ ["Excédent brut d'exploitation",124000,500,"€","350 000 − 214 000 − 12 000"],
+ ["Résultat d'exploitation",86000,500,"€","124 000 − 38 000"],
+ ["Résultat net",57000,500,"€","86 000 − 11 000 − 18 000"],
+ ["Taux de marge nette",5.9,0.2,"%","57 000 ÷ 968 000"],
+ ["Rentabilité financière",21.3,0.3,"%","57 000 ÷ 268 000"],
+ ["Rentabilité économique",14.0,0.3,"%","86 000 ÷ 615 000"]
+];
+NOT.n10={t:"N10 — Décision",min:0,lede:"",q:[
+ {id:"10.1",docs:[5],t:"Quelle marge l'abonnement dégage-t-il par abonné et par mois, en euros ?",ans:23,tol:0.05,u:"€",ex:"39,00 − 16,00 = <b>23,00 €</b> par mois, soit 276,00 € par an."},
+ {id:"10.2",docs:[5],t:"À partir de combien d'abonnés le service couvre-t-il ses charges fixes ?",ans:150,tol:0.5,u:"abonnés",ex:"41 400 ÷ 276 = <b>150 abonnés</b>. Avec 228 abonnés, le seuil est largement dépassé."},
+ {id:"10.3",docs:[5],t:"Quel résultat le service dégage-t-il avec ses 228 abonnés actuels, en euros ?",ans:21528,tol:50,u:"€",ex:"228 × 276 = 62 928 € de marge, moins 41 400 € de charges fixes = <b>21 528 €</b>. À rapporter au résultat net total de 57 000 € : l'abonnement en produit déjà plus du tiers."},
+ {id:"10.4",docs:[5],t:"Si le prix passait à 33,00 €, combien d'abonnés faudrait-il pour couvrir les charges fixes ?",ans:203,tol:0.5,u:"abonnés",ex:"Nouvelle marge : 33 − 16 = 17 €/mois, soit 204 €/an. 41 400 ÷ 204 = 202,9 → <b>203 abonnés</b>. Une baisse de prix de 15,4 % fait bondir le seuil de 35,3 % : avant de baisser le prix, il faut être certain de recruter au moins 53 abonnés de plus rien que pour rester au même point.",hint:"Un abonné n'est pas divisible : dans quel sens arrondit-on ?"}]};
+
+/* =========================================================
+   MOTEUR — écran partagé, correction différée
+   ========================================================= */
+const R=(n,d=2)=>Math.round(n*10**d)/10**d;
+const fr=(n,d=2)=>R(n,d).toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:d});
+function norm(s){return (s||"").toString().trim().replace(/\s|\u00a0|€|%/g,"").replace(",",".").replace(/[^0-9.\-+]/g,"");}
+const T8=[62456,63580,37780,62184,226000];
+const NUM=()=>Object.values(NOT).flatMap(n=>n.q);
+const findQ=id=>NUM().find(q=>q.id===id);
+let ANS={}, CORR=false, CUR="s-intro";
+
+/* liste complète des items à renseigner */
+function ITEMS(){
+  const L=[];
+  NUM().forEach(q=>L.push("Q"+q.id));
+  N8.forEach((q,i)=>L.push("V"+i));
+  N9.forEach((q,i)=>L.push("P"+i));
+  T8.forEach((g,i)=>L.push("T"+i));
+  TB.forEach((r,i)=>L.push("B"+i));
+  return L;
+}
+const rempli=k=>ANS[k]!==undefined&&ANS[k]!==null&&String(ANS[k]).trim()!=="";
+const nbRempli=()=>ITEMS().filter(rempli).length;
+
+/* ---------- navigation ---------- */
+const ORD=[["s-intro","Départ"],["s-n1","N1"],["s-n2","N2"],["s-n3","N3"],["s-n4","N4"],["s-n5","N5"],
+ ["s-n6","N6"],["s-n7","N7"],["s-n8","N8"],["s-n9","N9"],["s-n10","N10"],["s-bilan","Bilan"]];
+function buildNav(){document.getElementById('nav').innerHTML=ORD.map(([id,l])=>
+ `<button id="n-${id}" onclick="go('${id}')">${l}</button>`).join("");}
+function sectItems(id){
+  const k=id.replace('s-','');
+  if(NOT[k]) return NOT[k].q.map(q=>"Q"+q.id).concat(k==='n10'?TB.map((r,i)=>"B"+i):[]);
+  if(id==='s-n8') return N8.map((q,i)=>"V"+i).concat(T8.map((g,i)=>"T"+i));
+  if(id==='s-n9') return N9.map((q,i)=>"P"+i);
+  return [];
+}
+function go(id){CUR=id;render();window.scrollTo(0,0);
+ const w=document.getElementById('work'); if(w)w.scrollTop=0;
+ if(window.innerWidth<=1000)document.getElementById('annexes').classList.remove('show');}
+function majNav(){ORD.forEach(([id])=>{const b=document.getElementById('n-'+id);if(!b)return;
+ const it=sectItems(id);
+ b.className=(id===CUR?'on':(it.length&&it.every(rempli)?'fait':''));});}
+function toggleAnnexes(){document.getElementById('annexes').classList.toggle('show');}
+
+/* ---------- annexes ---------- */
+function buildAnnexes(){
+  document.getElementById('annexlist').innerHTML=Object.keys(DOCS).map(n=>
+   `<div class="acc" id="acc-${n}"><button onclick="document.getElementById('acc-${n}').classList.toggle('open')">
+    <span>Doc ${n} — ${DOCS[n].t}</span><i>+</i></button><div>${DOCS[n].h}</div></div>`).join("");
+  ["1","2"].forEach(n=>{const e=document.getElementById('acc-'+n);if(e)e.classList.add('open');});
+}
+function ouvrir(n){const e=document.getElementById('acc-'+n);if(!e)return;
+ e.classList.add('open');
+ if(window.innerWidth<=1000)document.getElementById('annexes').classList.add('show');
+ e.scrollIntoView({block:'start'});}
+function chips(l){return (!l||!l.length)?"":`<div class="acts" style="margin:0 0 9px">`+
+ l.map(n=>`<button class="btn sm ghost" onclick="ouvrir(${n})">Annexe ${n}</button>`).join("")+`</div>`;}
+
+/* ---------- saisie ---------- */
+function setA(k,v){ANS[k]=v;majFoot();majNav();}
+function numCard(q){
+  const k="Q"+q.id, v=ANS[k]===undefined?"":ANS[k];
+  let corr="";
+  if(CORR){
+    const ok=isFinite(parseFloat(norm(v)))&&Math.abs(parseFloat(norm(v))-q.ans)<=q.tol;
+    corr=`<div class="fb ${ok?'ok':'ko'}">${ok?"<b>Correct.</b> ":"<b>Attendu : "+fr(q.ans,4)+" "+(q.u||"")+".</b> "}${q.ex}</div>`;
+  }
+  const cls=CORR?(corrOk(k,q)?"good":"bad"):(rempli(k)?"rep":"");
+  return `<div class="q ${cls}"><div class="qh"><span class="qn">${q.id}</span><span class="qt">${q.t}</span></div>
+   ${CORR?"":chips(q.docs)}
+   <div class="numrow"><input type="text" inputmode="decimal" value="${String(v).replace(/"/g,'&quot;')}"
+     ${CORR?"disabled":""} oninput="setA('${k}',this.value);this.closest('.q').classList.add('rep');
+     this.parentNode.nextElementSibling.classList.add('on')"><span class="unit">${q.u||""}</span></div>
+   <div class="saved ${rempli(k)&&!CORR?'on':''}">Réponse enregistrée</div>
+   ${(!CORR&&q.hint)?`<div class="acts"><button class="btn sm ghost" onclick="alert('Indice : '+${JSON.stringify(q.hint)})">Indice</button></div>`:""}
+   ${corr}</div>`;
+}
+function corrOk(k,q){
+  if(k[0]==="Q"){const v=parseFloat(norm(ANS[k]));return isFinite(v)&&Math.abs(v-q.ans)<=q.tol;}
+  if(k[0]==="V"){return ANS[k]===(N8[+k.slice(1)].ok?"vrai":"faux");}
+  if(k[0]==="P"){return ANS[k]===N9[+k.slice(1)].ok;}
+  if(k[0]==="T"){const v=parseFloat(norm(ANS[k]));return isFinite(v)&&Math.abs(v-T8[+k.slice(1)])<=5;}
+  if(k[0]==="B"){const r=TB[+k.slice(1)],v=parseFloat(norm(ANS[k]));return isFinite(v)&&Math.abs(v-r[1])<=r[2];}
+  return false;
+}
+function choixCard(pref,i,q,labels){
+  const k=pref+i, v=ANS[k];
+  let corr="";
+  if(CORR){const ok=corrOk(k,q);
+   const att=(pref==="V")?(q.ok?"vrai":"faux"):q.ok;
+   corr=`<div class="fb ${ok?'ok':'ko'}">${ok?"<b>Correct.</b> ":"<b>Attendu : "+att+".</b> "}${q.ex}</div>`;}
+  const cls=CORR?(corrOk(k,q)?"good":"bad"):(rempli(k)?"rep":"");
+  return `<div class="q ${cls}"><div class="qh"><span class="qn">${String.fromCharCode(97+i)}</span><span class="qt">${q.t}</span></div>
+   <div class="acts">`+labels.map(L=>
+    `<button class="btn sm ${v===L[1]?'':'ghost'}" ${CORR?"disabled":""} onclick="setA('${k}','${L[1]}');render()">${L[0]}</button>`).join("")+
+   `</div><div class="saved ${rempli(k)&&!CORR?'on':''}">Réponse enregistrée : ${v||""}</div>${corr}</div>`;
+}
+function cellInput(k,val){
+ return `<input class="cell" type="text" inputmode="decimal" value="${val===undefined?"":val}" ${CORR?"disabled":""}
+  oninput="setA('${k}',this.value)" style="${CORR?(corrOk(k,null)?'border-color:#a9d5c6;background:#e7f4ef':'border-color:#e2b3b3;background:#fbeeee'):''}">`;
+}
+
+/* ---------- rendu des sections ---------- */
+function render(){
+  const w=document.getElementById('work');
+  let h="";
+  if(CUR==="s-intro") h=vueIntro();
+  else if(CUR==="s-bilan") h=vueBilan();
+  else if(CUR==="s-n8") h=vueN8();
+  else if(CUR==="s-n9") h=vueN9();
+  else if(CUR==="s-n10") h=vueN10();
+  else {const k=CUR.replace('s-',''),n=NOT[k];
+    h=`<h2>${n.t}</h2><span class="budget">${n.min} minutes</span><p class="lede">${n.lede}</p>`+
+      n.q.map(numCard).join("");}
+  w.innerHTML=h; majNav(); majFoot();
+}
+function vueIntro(){return `
+<h2>Cycl'Oise — le cas support</h2>
+<div class="card">
+<p><b>Cycl'Oise</b> est une SARL installée à Beauvais depuis 2016 : vente de vélos neufs, revente d'occasions reconditionnées, réparation, et depuis 2021 location longue durée par abonnement. Six salariés, dont deux mécaniciens.</p>
+<p>Son gérant, Malik Berthier, constate que la vente de vélos neufs pèse de moins en moins lourd tandis que l'abonnement progresse vite. Il veut un état chiffré complet avant de décider s'il renforce ce dernier.</p>
+<p style="margin-bottom:0">Les six annexes restent affichées à gauche pendant tout le travail. Sur tablette en mode portrait, le bouton <b>Annexes</b> en bas les ouvre en plein écran.</p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Règle du jeu</h3>
+<p>Vos réponses sont <b>enregistrées au fur et à mesure</b>, sans correction. La correction complète ne s'affiche qu'une fois <b>toutes</b> les réponses saisies, par le bouton « Terminer et corriger » en bas de l'écran. Une fois affichée, elle est définitive : les réponses sont verrouillées.</p>
+<div class="warn"><b>Écriture des réponses.</b> Virgule ou point, peu importe. N'écrivez pas l'unité. Taux à une décimale, montants à deux au plus, coefficients à quatre.</div>
+<div class="wrap"><table>
+<tr><th>Étape</th><th>Notion</th><th>Durée</th></tr>
+<tr><td>N1</td><td>Proportions et parts</td><td class="n">10 min</td></tr>
+<tr><td>N2</td><td>Appliquer et enchaîner des taux</td><td class="n">12 min</td></tr>
+<tr><td>N3</td><td>Variation, coefficient, indice</td><td class="n">15 min</td></tr>
+<tr><td>N4</td><td>Taux annuel moyen et projection</td><td class="n">12 min</td></tr>
+<tr><td>N5</td><td>Points et pourcentage</td><td class="n">8 min</td></tr>
+<tr><td>N6</td><td>Proportionnalité et échelles de temps</td><td class="n">12 min</td></tr>
+<tr><td>N7</td><td>HT, TTC et marges</td><td class="n">8 min</td></tr>
+<tr><td>N8</td><td>Lecture de tableau</td><td class="n">15 min</td></tr>
+<tr><td>N9</td><td>Contrôle de vraisemblance</td><td class="n">10 min</td></tr>
+<tr><td>N10</td><td>Tableau de bord et décision</td><td class="n">18 min</td></tr>
+<tr><td><b>Total</b></td><td></td><td class="n"><b>2 h 00</b></td></tr>
+</table></div>
+<div class="acts"><button class="btn" onclick="clockStart();go('s-n1')">Démarrer le chronomètre et commencer</button></div>
+</div>`;}
+function vueN8(){
+ return `<h2>N8 — Lire un tableau</h2><span class="budget">15 minutes</span>
+ <p class="lede">Complétez d'abord la colonne des variations en euros, puis départagez le vrai du faux.</p>
+ ${CORR?"":chips([2])}
+ <div class="card"><div class="wrap"><table>
+ <tr><th>Activité</th><th>CA 2023</th><th>Part</th><th>CA 2026</th><th>Part</th><th>Variation en €</th></tr>
+ <tr><td>Vélos neufs</td><td class="n">460 040</td><td class="n">62,0 %</td><td class="n">522 496</td><td class="n">54,0 %</td><td>${cellInput("T0",ANS["T0"])}</td></tr>
+ <tr><td>Occasion reconditionnée</td><td class="n">81 620</td><td class="n">11,0 %</td><td class="n">145 200</td><td class="n">15,0 %</td><td>${cellInput("T1",ANS["T1"])}</td></tr>
+ <tr><td>Atelier réparation</td><td class="n">155 820</td><td class="n">21,0 %</td><td class="n">193 600</td><td class="n">20,0 %</td><td>${cellInput("T2",ANS["T2"])}</td></tr>
+ <tr><td>Location par abonnement</td><td class="n">44 520</td><td class="n">6,0 %</td><td class="n">106 704</td><td class="n">11,0 %</td><td>${cellInput("T3",ANS["T3"])}</td></tr>
+ <tr><td><b>Total</b></td><td class="n"><b>742 000</b></td><td class="n">100 %</td><td class="n"><b>968 000</b></td><td class="n">100 %</td><td>${cellInput("T4",ANS["T4"])}</td></tr>
+ </table></div>
+ ${CORR?`<div class="fb ${T8.every((g,i)=>corrOk("T"+i))?'ok':'ko'}"><b>Variations attendues :</b> ${T8.map(g=>fr(g,0)+" €").join(" · ")}.
+  Trois activités progressent de montants presque identiques (entre 62 000 et 64 000 €) alors que leurs taux vont de + 13,6 % à + 139,7 % : regarder les seuls taux donne une image très différente de la réalité.</div>`:""}
+ </div>`+N8.map((q,i)=>choixCard("V",i,q,[["Vrai","vrai"],["Faux","faux"]])).join("");
+}
+function vueN9(){
+ return `<h2>N9 — Contrôle de vraisemblance</h2><span class="budget">10 minutes</span>
+ <p class="lede">Six résultats rendus par des élèves sur ce même cas. Lesquels sont impossibles, et pourquoi ?</p>`+
+ N9.map((q,i)=>choixCard("P",i,q,[["Plausible","plausible"],["Impossible","impossible"]])).join("");
+}
+function vueN10(){
+ let tab=`<div class="card"><h3 style="margin-top:0">A. Le tableau de bord 2026</h3>
+  <div class="wrap"><table><tr><th>Indicateur</th><th style="width:34%">Votre résultat</th><th style="width:16%">Unité</th></tr>`+
+  TB.map((r,i)=>`<tr><td>${r[0]}</td><td>${cellInput("B"+i,ANS["B"+i])}</td><td class="unit">${r[3]}</td></tr>`).join("")+
+  `</table></div>`;
+ if(CORR){tab+=`<div class="fb ${TB.every((r,i)=>corrOk("B"+i))?'ok':'ko'}"><b>Résultats attendus :</b><ul style="margin:6px 0 0">`+
+  TB.map(r=>`<li>${r[0]} : ${r[4]} = <b>${fr(r[1],1)} ${r[3]}</b></li>`).join("")+
+  `</ul><p style="margin:8px 0 0">Le taux de valeur ajoutée (36,2 %) dépasse à peine la moyenne de la filière (34 %) : l'entreprise revend beaucoup plus qu'elle ne transforme. Mais un taux de marge nette de 5,9 % et une rentabilité financière de 21,3 % traduisent une activité saine.</p></div>`;}
+ tab+=`</div>`;
+ return `<h2>N10 — Tableau de bord et décision</h2><span class="budget">18 minutes</span>
+  <p class="lede">Deux temps : construire le tableau de bord, puis trancher sur l'abonnement.</p>
+  ${CORR?"":chips([3,5])}${tab}
+  <h3>B. Faut-il renforcer l'abonnement ?</h3>`+NOT.n10.q.map(numCard).join("")+
+  `<div class="note"><b>Pour finir.</b> Rédigez trois phrases d'interprétation, une par indicateur de votre choix, en respectant les trois temps : constat chiffré, comparaison, interprétation. Le taux de valeur ajoutée moyen du commerce de cycles est de 34 %.</div>`;
+}
+function grpScore(g){
+ const k=ITEMS().filter(x=>grpOf(x)===g);
+ return k.filter(x=>corrOk(x,x[0]==="Q"?findQ(x.slice(1)):null)).length+"/"+k.length;
+}
+function grpOf(k){
+ if(k[0]==="Q")return "n"+k.slice(1).split('.')[0];
+ if(k[0]==="V"||k[0]==="T")return "n8";
+ if(k[0]==="P")return "n9";
+ if(k[0]==="B")return "n10";
+ return "?";
+}
+function vueBilan(){
+ if(!CORR) return `<h2>Bilan</h2><div class="card">
+  <p>Le bilan s'affiche une fois le dossier terminé et corrigé.</p>
+  <p class="lede">Il reste <b>${ITEMS().length-nbRempli()}</b> réponse(s) à saisir. Le bouton « Terminer et corriger », en bas de l'écran, s'active dès que tout est rempli.</p></div>`;
+ const L=[["n1","Parts"],["n2","Taux"],["n3","Variations"],["n4","Taux moyen"],["n5","Points"],
+  ["n6","Conversions"],["n7","HT/TTC"],["n8","Lecture"],["n9","Vraisemblance"],["n10","Décision"]];
+ const tot=ITEMS().filter(x=>corrOk(x,x[0]==="Q"?findQ(x.slice(1)):null)).length;
+ const bad={};
+ ITEMS().forEach(x=>{if(!corrOk(x,x[0]==="Q"?findQ(x.slice(1)):null)){const g=grpOf(x);bad[g]=(bad[g]||0)+1;}});
+ const lab={n1:"proportions et parts",n2:"application et enchaînement des taux",n3:"variations, coefficient, indice",
+  n4:"taux annuel moyen et projection",n5:"points et pourcentage",n6:"proportionnalité et conversions",
+  n7:"HT, TTC et marges",n8:"lecture de tableau",n9:"contrôle de vraisemblance",n10:"tableau de bord et décision"};
+ let h=`<h2>Bilan</h2><div class="card">
+  <div class="score">`+L.map(([g,l])=>`<div class="sc"><b>${grpScore(g)}</b><small>${l}</small></div>`).join("")+
+  `<div class="sc"><b>${tot}/${ITEMS().length}</b><small>Total</small></div></div>`;
+ h += Object.keys(bad).length
+  ? `<div class="note"><b>À retravailler en priorité :</b><ul style="margin:6px 0 0">`+
+    Object.entries(bad).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<li>${lab[k]} — ${v} erreur${v>1?"s":""}</li>`).join("")+`</ul></div>`
+  : `<div class="note"><b>Aucune erreur.</b> Reprenez N4 et N7 sans le mémo : ce sont les notions qui se perdent le plus vite.</div>`;
+ h+=`<p class="lede">Temps restant sur les deux heures : <b>${fmt(Math.max(0,left))}</b>.</p>
+  <div class="acts"><button class="btn" onclick="exporter()">Télécharger mon travail</button>
+  <button class="btn ghost" onclick="window.print()">Imprimer</button></div></div>`;
+ return h;
+}
+
+/* ---------- pied de page et déverrouillage ---------- */
+function majFoot(){
+ const n=nbRempli(),T=ITEMS().length;
+ document.getElementById('pbar').style.width=(100*n/T)+"%";
+ document.getElementById('foot').innerHTML=CORR
+  ? `Dossier corrigé — <b>${ITEMS().filter(x=>corrOk(x,x[0]==="Q"?findQ(x.slice(1)):null)).length} / ${T}</b>`
+  : `<b>${n} / ${T}</b> réponses enregistrées${n<T?` — il en reste ${T-n}`:` — vous pouvez corriger`}`;
+ const b=document.getElementById('endbtn');
+ b.disabled=CORR||n<T; b.textContent=CORR?"Corrigé affiché":"Terminer et corriger";
+}
+function reveal(force){
+ if(!force&&nbRempli()<ITEMS().length)return;
+ if(!force&&!confirm("Afficher la correction ? Vos réponses seront verrouillées et vous ne pourrez plus les modifier."))return;
+ CORR=true; clearInterval(tick); running=false; go('s-bilan');
+}
+function teacher(){
+ const c=prompt("Code enseignant :");
+ if(c===null)return;
+ if(c.trim().toUpperCase()==="GREMPRIME"){CORR=true;render();alert("Correction déverrouillée.");}
+ else alert("Code incorrect.");
+}
+function exporter(){
+ let L=["MODULE A1 — ATELIER CHIFFRE — CAS CYCL'OISE","Genere le "+new Date().toLocaleString('fr-FR'),
+  "Temps restant : "+fmt(Math.max(0,left)),"",
+  "Score : "+ITEMS().filter(x=>corrOk(x,x[0]==="Q"?findQ(x.slice(1)):null)).length+" / "+ITEMS().length,
+  "".padEnd(64,"-"),""];
+ NUM().forEach(q=>{const k="Q"+q.id;
+  L.push(q.id+" — "+q.t.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim());
+  L.push("   reponse : "+(ANS[k]||"(vide)")+"   attendu : "+q.ans+" "+(q.u||"")+
+   "   -> "+(corrOk(k,q)?"correct":"a revoir"));});
+ N8.forEach((q,i)=>L.push("N8-"+String.fromCharCode(97+i)+" : "+(ANS["V"+i]||"(vide)")+" -> "+(corrOk("V"+i,q)?"correct":"a revoir")));
+ N9.forEach((q,i)=>L.push("N9-"+String.fromCharCode(97+i)+" : "+(ANS["P"+i]||"(vide)")+" -> "+(corrOk("P"+i,q)?"correct":"a revoir")));
+ T8.forEach((g,i)=>L.push("Tableau N8 cellule "+(i+1)+" : "+(ANS["T"+i]||"(vide)")+"   attendu "+g));
+ TB.forEach((r,i)=>L.push("Tableau de bord — "+r[0]+" : "+(ANS["B"+i]||"(vide)")+"   attendu "+r[1]+" "+r[3]));
+ const b=new Blob([L.join("\n")],{type:"text/plain;charset=utf-8"});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);
+ a.download="ModuleA1_CyclOise_travail.txt";a.click();URL.revokeObjectURL(a.href);
+}
+
+/* ---------- chronomètre ---------- */
+let left=7200,tick=null,running=false;
+function fmt(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;
+ return h+":"+String(m).padStart(2,'0')+":"+String(x).padStart(2,'0');}
+function clockStart(){if(running)return;running=true;
+ tick=setInterval(()=>{left--;const c=document.getElementById('clock');
+  c.textContent=fmt(Math.max(0,left));if(left<=600)c.className="hot";
+  if(left<=0){clearInterval(tick);running=false;c.textContent="0:00:00";}},1000);}
+function clockToggle(){if(running){clearInterval(tick);running=false;
+ document.getElementById('clock').textContent=fmt(left)+" \u23f8";}
+ else{document.getElementById('clock').textContent=fmt(left);clockStart();}}
+
+buildNav(); buildAnnexes(); render();
+</script>
+</body>
+</html>
